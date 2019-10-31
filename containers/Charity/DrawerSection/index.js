@@ -66,13 +66,7 @@ const DrawerSection = () => {
         >
           {menuItems.map((menu, index) => (
             <li key={`menu_key${index}`}>
-              <Link
-                href={menu.path}
-                offset={menu.offset}
-                onClick={handleDrawerToggle}
-              >
-                {menu.label}
-              </Link>
+              <Link href={menu.path}>{menu.label}</Link>
             </li>
           ))}
         </Scrollspy>

@@ -11,21 +11,32 @@ import ErrorImage from '../../common/src/assets/image/404.svg';
 import { home } from 'react-icons-kit/entypo/home';
 import { ccw } from 'react-icons-kit/entypo/ccw';
 import { ErrorWrapper, ErrorConatent, ButtonWrapper } from './error.style';
-
-const ErrorSec = ({ imageWrapper, title, text, reloadButton, homeButton }) => {
+import { withRouter } from 'next/router';
+const ErrorSec = ({
+  imageWrapper,
+  title,
+  text,
+  reloadButton,
+  homeButton,
+  router
+}) => {
   const pageReload = () => {
     window.location.reload();
   };
+
   return (
     <ErrorWrapper>
       <ErrorConatent>
         <Box {...imageWrapper} className="image-wrapper">
           <Image src={ErrorImage} alt="404" />
         </Box>
-        <Heading {...title} content="Page not found!" />
+        <Heading {...title} content="" />
+        <h2>
+          <center> Page {router.asPath} not found</center>
+        </h2>
         <Text
           {...text}
-          content="Looks like the page you're trying to visit dosen't exist. Please check the URL and try your luck again."
+          content="Looks like the page you're trying to visit dosen't exist. Please check the URL and try again."
         />
         <ButtonWrapper>
           <Button
@@ -102,4 +113,4 @@ ErrorSec.defaultProps = {
   }
 };
 
-export default ErrorSec;
+export default withRouter(ErrorSec);

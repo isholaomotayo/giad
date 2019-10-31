@@ -20,15 +20,20 @@ import PropTypes from 'prop-types';
 import Footer from '../containers/Charity/Footer';
 import Container from '../common/src/components/UI/Container';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import Box from '@material-ui/core/Box';
 import PaystackButton from 'react-paystack';
-
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import {
   GlobalStyle,
   CharityWrapper,
   ContentWrapper
 } from '../containers/Charity/charity.style';
-
+import states from '../components/StatesAndLGA';
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
@@ -49,11 +54,19 @@ const useStyles = makeStyles(theme => ({
 const Register = ({ row, col }, shows) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    firstname: '',
+    firstname: 'Omotayo',
     middlename: '',
-    lastname: ''
+    lastname: '',
+    email: '',
+    phone: '',
+    stateOfOrigin: '',
+    residence: '',
+    lga: ''
   });
-
+  const lgaList =
+    values.stateOfOrigin !== ''
+      ? states[values.stateOfOrigin]
+      : states['Abia State'];
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -93,71 +106,186 @@ const Register = ({ row, col }, shows) => {
             <PromotionBlock />
             <Container width="1260px">
               <form className={classes.container} autoComplete="off">
-                <TextField
-                  id="outlined-name"
-                  label="First Name"
-                  className={classes.textField}
-                  value={values.firstname}
-                  onChange={handleChange('firstname')}
-                  margin="normal"
-                  variant="outlined"
-                />
+                <Box width="30%" m={2}>
+                  {' '}
+                  <TextField
+                    fullWidth
+                    id="outlined-name"
+                    label="First Name"
+                    className={classes.textField}
+                    value={values.firstname}
+                    onChange={handleChange('firstname')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="30%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-name"
+                    label="Middle Name"
+                    className={classes.textField}
+                    value={values.middlename}
+                    onChange={handleChange('middlename')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="30%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-name"
+                    label="Last Name"
+                    className={classes.textField}
+                    value={values.lastname}
+                    onChange={handleChange('lastname')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="30%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-name"
+                    label="Phone Number"
+                    className={classes.textField}
+                    value={values.phone}
+                    onChange={handleChange('phone')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="30%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-name"
+                    label="email"
+                    className={classes.textField}
+                    value={values.email}
+                    onChange={handleChange('email')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="90%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-full-width"
+                    label="Permanent Residential address"
+                    style={{ margin: 8 }}
+                    placeholder="Permanent Residential address"
+                    value={values.residence}
+                    onChange={handleChange('residence')}
+                    margin="normal"
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                  />
+                </Box>
+                <Box width="30%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-select-state-of-origin"
+                    select
+                    label="State of origin"
+                    className={classes.textField}
+                    value={values.stateOfOrigin}
+                    onChange={handleChange('stateOfOrigin')}
+                    SelectProps={{
+                      MenuProps: {
+                        className: classes.menu
+                      }
+                    }}
+                    helperText="Please select your state of origin"
+                    margin="normal"
+                    variant="outlined"
+                  >
+                    {Object.keys(states).map(state => (
+                      <MenuItem key={state} value={state}>
+                        {state}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+                <Box width="30%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-select-state-lga"
+                    select
+                    label="Local Government"
+                    className={classes.textField}
+                    value={values.lga}
+                    onChange={handleChange('lga')}
+                    SelectProps={{
+                      MenuProps: {
+                        className: classes.menu
+                      }
+                    }}
+                    helperText="Please select your Local Government"
+                    margin="normal"
+                    variant="outlined"
+                  >
+                    {lgaList.map(lga => (
+                      <MenuItem key={lga} value={lga}>
+                        {lga}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+                <Box width="30%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-name"
+                    label="Means of Identification"
+                    className={classes.textField}
+                    value={values.identification}
+                    onChange={handleChange('identification')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="30%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-name"
+                    label="ID Number"
+                    className={classes.textField}
+                    value={values.idNumber}
+                    onChange={handleChange('idNumber')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
 
-                <TextField
-                  id="outlined-name"
-                  label="Middle Name"
-                  className={classes.textField}
-                  value={values.middlename}
-                  onChange={handleChange('middlename')}
-                  margin="normal"
-                  variant="outlined"
-                />
-
-                <TextField
-                  id="outlined-name"
-                  label="Last Name"
-                  className={classes.textField}
-                  value={values.lastname}
-                  onChange={handleChange('lastname')}
-                  margin="normal"
-                  variant="outlined"
-                />
-
-                <br />
-                <TextField
-                  id="outlined-name"
-                  label="Phone Number"
-                  className={classes.textField}
-                  value={values.phone}
-                  onChange={handleChange('phone')}
-                  margin="normal"
-                  variant="outlined"
-                />
-
-                <TextField
-                  id="outlined-name"
-                  label="email"
-                  className={classes.textField}
-                  value={values.email}
-                  onChange={handleChange('email')}
-                  margin="normal"
-                  variant="outlined"
-                />
-
-                <TextField
-                  id="outlined-full-width"
-                  label="Permanent Residential address"
-                  style={{ margin: 8 }}
-                  placeholder="Permanent Residential address"
-                  fullWidth
-                  margin="normal"
-                  variant="outlined"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
+                <Box width="30%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-name"
+                    label="Nationality at Birth"
+                    className={classes.textField}
+                    value={values.nationalityAtBirth}
+                    onChange={handleChange('nationalityAtBirth')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="30%" m={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-name"
+                    label="Current Nationality"
+                    className={classes.textField}
+                    value={values.currentNationality}
+                    onChange={handleChange('currentNationality')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
               </form>
-              <Payment />
+              <Box width="30%" m={3}>
+                <Payment />
+              </Box>
             </Container>
           </ContentWrapper>
           <Footer />
