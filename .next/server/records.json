@@ -1,0 +1,43 @@
+{
+  "modules": {
+    "byIdentifier": {
+      "multi private-next-pages/_app.js": 0,
+      "multi private-next-pages/_document.js": 1,
+      "multi private-next-pages/_error.js": 2,
+      "multi private-next-pages/index.js": 3,
+      "multi private-next-pages/join.js": 4,
+      "multi private-next-pages/payment.js": 5,
+      "multi private-next-pages/register.js": 6
+    },
+    "usedIds": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6
+    }
+  },
+  "chunks": {
+    "byName": {
+      "static/CxJsfJA1ACT_ITVAlseTy/pages/_app.js": 0,
+      "static/CxJsfJA1ACT_ITVAlseTy/pages/_document.js": 1,
+      "static/CxJsfJA1ACT_ITVAlseTy/pages/_error.js": 2,
+      "static/CxJsfJA1ACT_ITVAlseTy/pages/index.js": 3,
+      "static/CxJsfJA1ACT_ITVAlseTy/pages/join.js": 4,
+      "static/CxJsfJA1ACT_ITVAlseTy/pages/payment.js": 5,
+      "static/CxJsfJA1ACT_ITVAlseTy/pages/register.js": 6
+    },
+    "bySource": {},
+    "usedIds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+}
