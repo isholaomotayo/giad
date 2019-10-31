@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2877,7 +2877,13 @@ const DrawerSection = () => {
       lineNumber: 69
     },
     __self: undefined
-  }, menu.label))))));
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 70
+    },
+    __self: undefined
+  }, menu.label)))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (DrawerSection);
@@ -6214,8 +6220,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_35___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_35__);
 /* harmony import */ var _material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @material-ui/core/FormLabel */ "@material-ui/core/FormLabel");
 /* harmony import */ var _material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_36___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_36__);
-/* harmony import */ var _containers_Charity_charity_style__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../containers/Charity/charity.style */ "./containers/Charity/charity.style.js");
-/* harmony import */ var _components_StatesAndLGA__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../components/StatesAndLGA */ "./components/StatesAndLGA.js");
+/* harmony import */ var _date_io_date_fns__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @date-io/date-fns */ "@date-io/date-fns");
+/* harmony import */ var _date_io_date_fns__WEBPACK_IMPORTED_MODULE_37___default = /*#__PURE__*/__webpack_require__.n(_date_io_date_fns__WEBPACK_IMPORTED_MODULE_37__);
+/* harmony import */ var _material_ui_pickers__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @material-ui/pickers */ "@material-ui/pickers");
+/* harmony import */ var _material_ui_pickers__WEBPACK_IMPORTED_MODULE_38___default = /*#__PURE__*/__webpack_require__.n(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_38__);
+/* harmony import */ var _containers_Charity_charity_style__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../containers/Charity/charity.style */ "./containers/Charity/charity.style.js");
+/* harmony import */ var _components_StatesAndLGA__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../components/StatesAndLGA */ "./components/StatesAndLGA.js");
 
 
 
@@ -6229,6 +6239,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement;
 function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(source).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+
+
 
 
 
@@ -6285,16 +6297,17 @@ const Register = ({
 }, shows) => {
   const classes = useStyles();
   const [values, setValues] = react__WEBPACK_IMPORTED_MODULE_7___default.a.useState({
-    firstname: 'Omotayo',
+    firstname: '',
     middlename: '',
     lastname: '',
+    dob: new Date('2014-08-18T21:11:54'),
     email: '',
     phone: '',
     stateOfOrigin: '',
     residence: '',
     lga: ''
   });
-  const lgaList = values.stateOfOrigin !== '' ? _components_StatesAndLGA__WEBPACK_IMPORTED_MODULE_38__["default"][values.stateOfOrigin] : _components_StatesAndLGA__WEBPACK_IMPORTED_MODULE_38__["default"]['Abia State'];
+  const lgaList = values.stateOfOrigin !== '' ? _components_StatesAndLGA__WEBPACK_IMPORTED_MODULE_40__["default"][values.stateOfOrigin] : _components_StatesAndLGA__WEBPACK_IMPORTED_MODULE_40__["default"]['Abia State'];
 
   const handleChange = name => event => {
     setValues(_objectSpread({}, values, {
@@ -6302,37 +6315,43 @@ const Register = ({
     }));
   };
 
+  const handleDateChange = date => date => {
+    setValues(_objectSpread({}, values, {
+      dob: date
+    }));
+  };
+
   return __jsx(styled_components__WEBPACK_IMPORTED_MODULE_10__["ThemeProvider"], {
     theme: _common_src_theme_charity__WEBPACK_IMPORTED_MODULE_11__["charityTheme"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 85
     },
     __self: undefined
   }, __jsx(react__WEBPACK_IMPORTED_MODULE_7__["Fragment"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 86
     },
     __self: undefined
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 88
     },
     __self: undefined
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 89
     },
     __self: undefined
   }, "GIAD | Global Initiative Axgainst Disasters"), __jsx("meta", {
     name: "Description",
-    content: "GIAD | Global Initiative Axgainst Disasters",
+    content: "GIAD | Global Initiative Against Disasters",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 90
     },
     __self: undefined
   }), __jsx("meta", {
@@ -6340,7 +6359,7 @@ const Register = ({
     content: "#0071bc",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 94
     },
     __self: undefined
   }), __jsx("meta", {
@@ -6348,33 +6367,25 @@ const Register = ({
     content: "width=device-width, initial-scale=1.0",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
-    },
-    __self: undefined
-  }), __jsx("link", {
-    href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap",
-    rel: "stylesheet",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 95
     },
     __self: undefined
   })), __jsx(_common_src_assets_css_style__WEBPACK_IMPORTED_MODULE_12__["ResetCSS"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 94
+      lineNumber: 101
     },
     __self: undefined
-  }), __jsx(_containers_Charity_charity_style__WEBPACK_IMPORTED_MODULE_37__["GlobalStyle"], {
+  }), __jsx(_containers_Charity_charity_style__WEBPACK_IMPORTED_MODULE_39__["GlobalStyle"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 102
     },
     __self: undefined
-  }), __jsx(_containers_Charity_charity_style__WEBPACK_IMPORTED_MODULE_37__["CharityWrapper"], {
+  }), __jsx(_containers_Charity_charity_style__WEBPACK_IMPORTED_MODULE_39__["CharityWrapper"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 98
+      lineNumber: 105
     },
     __self: undefined
   }, __jsx(react_stickynode__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -6383,44 +6394,44 @@ const Register = ({
     activeClass: "sticky-nav-active",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 99
+      lineNumber: 106
     },
     __self: undefined
   }, __jsx(_containers_Charity_Navbar__WEBPACK_IMPORTED_MODULE_14__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 100
+      lineNumber: 107
     },
     __self: undefined
   })), __jsx(_common_src_contexts_DrawerContext__WEBPACK_IMPORTED_MODULE_13__["DrawerProvider"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 102
+      lineNumber: 109
     },
     __self: undefined
   }, __jsx(_containers_Charity_DrawerSection__WEBPACK_IMPORTED_MODULE_15__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 103
+      lineNumber: 110
     },
     __self: undefined
-  })), __jsx(_containers_Charity_charity_style__WEBPACK_IMPORTED_MODULE_37__["ContentWrapper"], {
+  })), __jsx(_containers_Charity_charity_style__WEBPACK_IMPORTED_MODULE_39__["ContentWrapper"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 105
+      lineNumber: 112
     },
     __self: undefined
   }, __jsx(_containers_Charity_PromotionBlock__WEBPACK_IMPORTED_MODULE_20__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 106
+      lineNumber: 113
     },
     __self: undefined
   }), __jsx(_common_src_components_UI_Container__WEBPACK_IMPORTED_MODULE_27__["default"], {
     width: "1260px",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 107
+      lineNumber: 114
     },
     __self: undefined
   }, __jsx("form", {
@@ -6428,7 +6439,7 @@ const Register = ({
     autoComplete: "off",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 108
+      lineNumber: 115
     },
     __self: undefined
   }, __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6436,7 +6447,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 109
+      lineNumber: 116
     },
     __self: undefined
   }, ' ', __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6450,7 +6461,7 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 111
+      lineNumber: 118
     },
     __self: undefined
   })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6458,7 +6469,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 129
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6472,7 +6483,7 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 130
     },
     __self: undefined
   })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6480,7 +6491,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 134
+      lineNumber: 141
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6494,7 +6505,7 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 142
     },
     __self: undefined
   })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6502,7 +6513,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 146
+      lineNumber: 153
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6516,7 +6527,7 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 154
     },
     __self: undefined
   })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6524,7 +6535,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 158
+      lineNumber: 165
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6538,15 +6549,46 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 159
+      lineNumber: 166
     },
     __self: undefined
   })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
+    width: "30%",
+    m: 2,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 177
+    },
+    __self: undefined
+  }, __jsx(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_38__["MuiPickersUtilsProvider"], {
+    utils: _date_io_date_fns__WEBPACK_IMPORTED_MODULE_37___default.a,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 178
+    },
+    __self: undefined
+  }, __jsx(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_38__["KeyboardDatePicker"], {
+    margin: "normal",
+    id: "date-picker-dialog",
+    label: "Date of Birth",
+    inputVariant: "outlined",
+    format: "dd/MM/yyyy",
+    value: values.dob,
+    onChange: handleDateChange('dob'),
+    KeyboardButtonProps: {
+      'aria-label': 'change date'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 179
+    },
+    __self: undefined
+  }))), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
     width: "90%",
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 170
+      lineNumber: 193
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6566,7 +6608,7 @@ const Register = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 171
+      lineNumber: 194
     },
     __self: undefined
   })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6574,7 +6616,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 186
+      lineNumber: 209
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6595,15 +6637,15 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 187
+      lineNumber: 210
     },
     __self: undefined
-  }, _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(_components_StatesAndLGA__WEBPACK_IMPORTED_MODULE_38__["default"]).map(state => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_23___default.a, {
+  }, _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(_components_StatesAndLGA__WEBPACK_IMPORTED_MODULE_40__["default"]).map(state => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_23___default.a, {
     key: state,
     value: state,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 205
+      lineNumber: 228
     },
     __self: undefined
   }, state)))), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6611,7 +6653,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 211
+      lineNumber: 234
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6632,7 +6674,7 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 212
+      lineNumber: 235
     },
     __self: undefined
   }, lgaList.map(lga => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_23___default.a, {
@@ -6640,7 +6682,7 @@ const Register = ({
     value: lga,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 230
+      lineNumber: 253
     },
     __self: undefined
   }, lga)))), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6648,7 +6690,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 236
+      lineNumber: 259
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6662,7 +6704,7 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 237
+      lineNumber: 260
     },
     __self: undefined
   })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6670,7 +6712,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 248
+      lineNumber: 271
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6684,7 +6726,7 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 249
+      lineNumber: 272
     },
     __self: undefined
   })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6692,7 +6734,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 261
+      lineNumber: 284
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6706,7 +6748,7 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 262
+      lineNumber: 285
     },
     __self: undefined
   })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -6714,7 +6756,7 @@ const Register = ({
     m: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 273
+      lineNumber: 296
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
@@ -6728,27 +6770,123 @@ const Register = ({
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 274
+      lineNumber: 297
     },
     __self: undefined
-  }))), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
+  })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
+    width: "30%",
+    margin: 2,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 308
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
+    fullWidth: true,
+    id: "outlined-name-intro",
+    label: "Who Introduced you to this project",
+    className: classes.textField,
+    value: values.referee,
+    onChange: handleChange('referee'),
+    margin: "normal",
+    variant: "outlined",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 309
+    },
+    __self: undefined
+  })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
+    width: "30%",
+    margin: 2,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 320
+    },
+    __self: undefined
+  }, ' ', __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
+    fullWidth: true,
+    id: "outlined-name-intro",
+    label: "Phone number of referrer",
+    className: classes.textField,
+    value: values.referee,
+    onChange: handleChange('refereePhone'),
+    margin: "normal",
+    variant: "outlined",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 322
+    },
+    __self: undefined
+  })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
+    width: "30%",
+    margin: 2,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 333
+    },
+    __self: undefined
+  }, ' ', __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
+    fullWidth: true,
+    id: "outlined-name-intro",
+    label: "Bank  of referrer",
+    className: classes.textField,
+    value: values.referee,
+    onChange: handleChange('refereeBank'),
+    margin: "normal",
+    variant: "outlined",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 335
+    },
+    __self: undefined
+  })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
+    width: "30%",
+    margin: 2,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 346
+    },
+    __self: undefined
+  }, ' ', __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_24___default.a, {
+    fullWidth: true,
+    id: "outlined-name-intro",
+    label: "Account Number  of referrer",
+    className: classes.textField,
+    value: values.referee,
+    onChange: handleChange('refereeAccount'),
+    margin: "normal",
+    variant: "outlined",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 348
+    },
+    __self: undefined
+  })), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
+    width: "100%",
+    margin: 2,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 359
+    },
+    __self: undefined
+  }, "ATTESTATION: Voluntarily, I do hereby agree to the rules guiding the respective investment as a law abiding and progressive citizen who love development in Nigeria.")), __jsx(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_29___default.a, {
     width: "30%",
     m: 3,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 286
+      lineNumber: 365
     },
     __self: undefined
   }, __jsx(Payment, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 287
+      lineNumber: 366
     },
     __self: undefined
   })))), __jsx(_containers_Charity_Footer__WEBPACK_IMPORTED_MODULE_26__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 291
+      lineNumber: 371
     },
     __self: undefined
   }))));
@@ -6822,7 +6960,7 @@ class Payment extends react__WEBPACK_IMPORTED_MODULE_7__["Component"] {
     return __jsx("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 364
+        lineNumber: 444
       },
       __self: this
     }, __jsx(react_paystack__WEBPACK_IMPORTED_MODULE_30___default.a, {
@@ -6839,7 +6977,7 @@ class Payment extends react__WEBPACK_IMPORTED_MODULE_7__["Component"] {
       tag: "button",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 365
+        lineNumber: 445
       },
       __self: this
     }));
@@ -45136,7 +45274,7 @@ base.propTypes = _objectSpread({}, styled_system__WEBPACK_IMPORTED_MODULE_7__["d
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!*********************************!*\
   !*** multi ./pages/register.js ***!
   \*********************************/
@@ -45145,6 +45283,17 @@ base.propTypes = _objectSpread({}, styled_system__WEBPACK_IMPORTED_MODULE_7__["d
 
 module.exports = __webpack_require__(/*! /Users/developer1/apps/giadFrontend/package/pages/register.js */"./pages/register.js");
 
+
+/***/ }),
+
+/***/ "@date-io/date-fns":
+/*!************************************!*\
+  !*** external "@date-io/date-fns" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@date-io/date-fns");
 
 /***/ }),
 
@@ -45277,6 +45426,17 @@ module.exports = require("@material-ui/core/TextField");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/styles");
+
+/***/ }),
+
+/***/ "@material-ui/pickers":
+/*!***************************************!*\
+  !*** external "@material-ui/pickers" ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/pickers");
 
 /***/ }),
 

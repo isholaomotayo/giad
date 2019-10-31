@@ -1,1 +1,0 @@
-{"ast":null,"code":"// This is client side config only - don't put anything in here that shouldn't be public!\nexport var endpoint = \"https://fierce-beyond-95458.herokuapp.com/\";\nexport var prodEndpoint = \"https://fierce-beyond-95458.herokuapp.com/\";\nexport var perPage = 4;","map":null,"metadata":{},"sourceType":"module"}

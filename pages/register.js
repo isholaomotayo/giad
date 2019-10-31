@@ -28,6 +28,12 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker
+} from '@material-ui/pickers';
 import {
   GlobalStyle,
   CharityWrapper,
@@ -54,9 +60,10 @@ const useStyles = makeStyles(theme => ({
 const Register = ({ row, col }, shows) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    firstname: 'Omotayo',
+    firstname: '',
     middlename: '',
     lastname: '',
+    dob: new Date('2014-08-18T21:11:54'),
     email: '',
     phone: '',
     stateOfOrigin: '',
@@ -70,6 +77,10 @@ const Register = ({ row, col }, shows) => {
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
+
+  const handleDateChange = date => date => {
+    setValues({ ...values, dob: date });
+  };
   return (
     <ThemeProvider theme={charityTheme}>
       <Fragment>
@@ -78,7 +89,7 @@ const Register = ({ row, col }, shows) => {
           <title>GIAD | Global Initiative Axgainst Disasters</title>
           <meta
             name="Description"
-            content="GIAD | Global Initiative Axgainst Disasters"
+            content="GIAD | Global Initiative Against Disasters"
           />
           <meta name="theme-color" content="#0071bc" />
           <meta
@@ -86,10 +97,6 @@ const Register = ({ row, col }, shows) => {
             content="width=device-width, initial-scale=1.0"
           />
           {/* Load google fonts */}
-          <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap"
-            rel="stylesheet"
-          />
         </Head>
         <ResetCSS />
         <GlobalStyle />
@@ -166,6 +173,22 @@ const Register = ({ row, col }, shows) => {
                     margin="normal"
                     variant="outlined"
                   />
+                </Box>
+                <Box width="30%" m={2}>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      margin="normal"
+                      id="date-picker-dialog"
+                      label="Date of Birth"
+                      inputVariant="outlined"
+                      format="dd/MM/yyyy"
+                      value={values.dob}
+                      onChange={handleDateChange('dob')}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date'
+                      }}
+                    />
+                  </MuiPickersUtilsProvider>
                 </Box>
                 <Box width="90%" m={2}>
                   <TextField
@@ -282,10 +305,67 @@ const Register = ({ row, col }, shows) => {
                     variant="outlined"
                   />
                 </Box>
+                <Box width="30%" margin={2}>
+                  <TextField
+                    fullWidth
+                    id="outlined-name-intro"
+                    label="Who Introduced you to this project"
+                    className={classes.textField}
+                    value={values.referee}
+                    onChange={handleChange('referee')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="30%" margin={2}>
+                  {' '}
+                  <TextField
+                    fullWidth
+                    id="outlined-name-intro"
+                    label="Phone number of referrer"
+                    className={classes.textField}
+                    value={values.referee}
+                    onChange={handleChange('refereePhone')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="30%" margin={2}>
+                  {' '}
+                  <TextField
+                    fullWidth
+                    id="outlined-name-intro"
+                    label="Bank  of referrer"
+                    className={classes.textField}
+                    value={values.referee}
+                    onChange={handleChange('refereeBank')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="30%" margin={2}>
+                  {' '}
+                  <TextField
+                    fullWidth
+                    id="outlined-name-intro"
+                    label="Account Number  of referrer"
+                    className={classes.textField}
+                    value={values.referee}
+                    onChange={handleChange('refereeAccount')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box width="100%" margin={2}>
+                  ATTESTATION: Voluntarily, I do hereby agree to the rules
+                  guiding the respective investment as a law abiding and
+                  progressive citizen who love development in Nigeria.
+                </Box>
               </form>
               <Box width="30%" m={3}>
                 <Payment />
               </Box>
+              {/* {JSON.stringify(values)} */}
             </Container>
           </ContentWrapper>
           <Footer />

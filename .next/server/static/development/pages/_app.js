@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1588,7 +1588,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_6___default.a {
 
 /***/ }),
 
-/***/ 0:
+/***/ 1:
 /*!****************************************!*\
   !*** multi private-next-pages/_app.js ***!
   \****************************************/

@@ -66,7 +66,9 @@ const DrawerSection = () => {
         >
           {menuItems.map((menu, index) => (
             <li key={`menu_key${index}`}>
-              <Link href={menu.path}>{menu.label}</Link>
+              <Link href={menu.path}>
+                <a>{menu.label}</a>
+              </Link>
             </li>
           ))}
         </Scrollspy>
