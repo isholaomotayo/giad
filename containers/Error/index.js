@@ -23,21 +23,18 @@ const ErrorSec = ({
   const pageReload = () => {
     window.location.reload();
   };
-
   return (
     <ErrorWrapper>
       <ErrorConatent>
         <Box {...imageWrapper} className="image-wrapper">
           <Image src={ErrorImage} alt="404" />
         </Box>
-        <Heading {...title} content="" />
-        <h2>
-          <center> Page {router.asPath} not found</center>
-        </h2>
+        <Heading {...title} content="Page not found!" />
         <Text
           {...text}
           content="Looks like the page you're trying to visit dosen't exist. Please check the URL and try again."
         />
+
         <ButtonWrapper>
           <Button
             {...reloadButton}

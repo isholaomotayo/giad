@@ -63,7 +63,7 @@ const Register = ({ row, col }, shows) => {
     firstname: '',
     middlename: '',
     lastname: '',
-    dob: new Date('2014-08-18T21:11:54'),
+    dob: new Date(),
     email: '',
     phone: '',
     stateOfOrigin: '',
