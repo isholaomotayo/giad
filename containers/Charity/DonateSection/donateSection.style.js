@@ -198,7 +198,7 @@ export const DonationForm = styled.form`
   .input_group {
     input {
       @media only screen and (max-width: 1360px) {
-        width: calc(100% - 140px);
+        width: calc(100% - 10px);
         padding: 0 15px;
         font-size: 15px;
         height: 56px;
@@ -208,7 +208,7 @@ export const DonationForm = styled.form`
         border-bottom-left-radius: 5px;
       }
       @media only screen and (max-width: 480px) {
-        width: calc(100% - 110px);
+        width: calc(100% - 10px);
         margin-bottom: 10px;
       }
     }

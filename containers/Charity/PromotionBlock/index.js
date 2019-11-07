@@ -23,7 +23,7 @@ const PromotionBlock = ({ row, col }) => {
         <Box className="row" {...row}>
           <Box className="col" {...col}>
             <ContentWrapper>
-              <Heading as="h5" content={slogan} />
+              {/* <Heading as="h5" content={slogan} /> */}
               <Heading content={title} />
               <Text content={text1} />
               <Text content={text2} />

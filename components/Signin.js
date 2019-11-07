@@ -77,7 +77,7 @@ class Signin extends Component {
           variables={this.state}
           refetchQueries={[{ query: CURRENT_USER_QUERY }]}
         >
-          {(signup, { error, loading }) => (
+          {(signin, { error, loading }) => (
             <SectionWrapper id="signup">
               <Container width="1260px">
                 <Box className="row" {...row}>
@@ -129,7 +129,7 @@ class Signin extends Component {
                       method="post"
                       onSubmit={async e => {
                         e.preventDefault();
-                        await signup();
+                        await signin();
                         Router.push('/register');
                         this.setState({ name: '', email: '', password: '' });
                       }}

@@ -13,11 +13,40 @@ import FooterWrapper, {
   SocialList,
   SelectWrapper
 } from './footer.style';
-
+import NoSsr from '@material-ui/core/NoSsr';
 import LogoImage from '../../../common/src/assets/image/charity/giadLogo.png';
 import { menuWidgets, socialLinks } from '../../../common/src/data/Charity';
-
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1)
+  },
+  dense: {
+    marginTop: theme.spacing(2)
+  },
+  menu: {
+    width: 200
+  }
+}));
 const Footer = ({ row, col, colOne, colTwo }) => {
+  const classes = useStyles();
+  const [values, setValues] = React.useState({
+    firstname: '',
+    message: '',
+    lastname: '',
+    email: ''
+  });
+  const handleChange = name => event => {
+    setValues({ ...values, [name]: event.target.value });
+  };
   return (
     <FooterWrapper>
       <Container width="1260px">
@@ -60,30 +89,92 @@ const Footer = ({ row, col, colOne, colTwo }) => {
             </SelectWrapper>
           </Box>
           {/* End of logo column */}
-          {/* <Box className="col-two" {...colTwo}>
-            {menuWidgets.map(widget => (
-              <Box
-                className="col"
-                {...col}
-                key={`footer__widget-key${widget.id}`}
-              >
-                <Heading
-                  className="widget_title"
-                  as="h3"
-                  content={widget.title}
-                />
-                <List>
-                  {widget.menu.map(item => (
-                    <ListItem key={`list__item-${item.id}`}>
-                      <Link href={item.link}>
-                        <a>{item.text}</a>
-                      </Link>
-                    </ListItem>
-                  ))}
-                </List>
+          <Box className="col-two" {...colTwo}>
+            <NoSsr>
+              <Box m={6}>
+                <h3> Contact Us</h3>
+                <form className={classes.container} autoComplete="off">
+                  {' '}
+                  <Box width="47%" m={2}>
+                    <TextField
+                      fullWidth
+                      id="outlined-name"
+                      label="First Name"
+                      className={classes.textField}
+                      value={values.firstname}
+                      onChange={handleChange('firstname')}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </Box>
+                  <Box width="47%" m={2}>
+                    <TextField
+                      fullWidth
+                      id="outlined-name"
+                      label="Last Name"
+                      className={classes.textField}
+                      value={values.lastname}
+                      onChange={handleChange('lastname')}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </Box>
+                  <Box width="47%" m={2}>
+                    <TextField
+                      fullWidth
+                      id="outlined-name"
+                      label="E-mail"
+                      className={classes.textField}
+                      value={values.firstname}
+                      onChange={handleChange('email')}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </Box>
+                  <Box width="47%" m={2}>
+                    <TextField
+                      fullWidth
+                      id="outlined-name"
+                      label="Phone Number"
+                      className={classes.textField}
+                      value={values.lastname}
+                      onChange={handleChange('phone')}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </Box>
+                  <Box m={2} width="99%">
+                    <TextField
+                      fullWidth
+                      id="outlined-full-width"
+                      label="Your message"
+                      style={{ margin: 8 }}
+                      placeholder="Your message"
+                      rows="4"
+                      value={values.residence}
+                      onChange={handleChange('message')}
+                      margin="normal"
+                      variant="outlined"
+                      multiline={true}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                    />{' '}
+                    <Box m={2}>
+                      <Button
+                        size="large"
+                        variant="outlined"
+                        color="primary"
+                        className={classes.button}
+                      >
+                        submit
+                      </Button>
+                    </Box>
+                  </Box>
+                </form>
               </Box>
-            ))}
-          </Box> */}
+            </NoSsr>
+          </Box>
           {/* End of List column */}
         </Box>
         {/* End of widgets row */}
