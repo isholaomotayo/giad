@@ -28,7 +28,7 @@ const PleaseSignIn = props => (
                 <div></div>
               </div>
               <br />
-              Please Sign In before Continuing
+              Loading...
             </p>
             <style jsx>
               {`
