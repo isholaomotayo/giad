@@ -28,7 +28,6 @@ const PleaseSignIn = props => (
                 <div></div>
               </div>
               <br />
-              Loading...
             </div>
             <style jsx>
               {`
@@ -112,8 +111,6 @@ const PleaseSignIn = props => (
           </>
         );
       }
-
-      localStorage.setItem('data', JSON.stringify(data));
 
       return props.children;
     }}

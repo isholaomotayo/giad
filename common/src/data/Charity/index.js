@@ -39,11 +39,6 @@ export const menuItems = [
     label: 'Our Milestone',
     path: '/#milestone',
     offset: '81'
-  },
-  {
-    label: 'Join the Initiative',
-    path: '/join#signup',
-    offset: '81'
   }
 
   // ,

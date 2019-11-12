@@ -8,7 +8,8 @@ import InnerWrapper, { SpreadButton } from './drawerSection.style';
 import Link from 'next/link';
 import { menuItems } from '../../../common/src/data/Charity';
 import heartImage from '../../../common/src/assets/image/charity/heart-red.png';
-
+import User from '../../../components/User';
+import Signout from '../../../components/Signout';
 const DrawerSection = () => {
   const [toggleState, setToggleState] = useState(false);
   const { state, dispatch } = useContext(DrawerContext);
@@ -71,6 +72,28 @@ const DrawerSection = () => {
               </Link>
             </li>
           ))}
+
+          <User>
+            {({ data }) => {
+              const me = data ? data.me : null;
+              return (
+                <div>
+                  {me && (
+                    <>
+                      <Signout />
+                    </>
+                  )}
+                  {!me && (
+                    <li key={34}>
+                      <Link href="/join">
+                        <a>Join the Initiative</a>
+                      </Link>
+                    </li>
+                  )}
+                </div>
+              );
+            }}
+          </User>
         </Scrollspy>
         {/* <SpreadButton>
           <span className="text">SPREAD</span>

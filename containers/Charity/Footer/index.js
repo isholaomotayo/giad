@@ -95,7 +95,7 @@ const Footer = ({ row, col, colOne, colTwo }) => {
                 <h3> Contact Us</h3>
                 <form className={classes.container} autoComplete="off">
                   {' '}
-                  <Box width="47%" m={2}>
+                  <Box width="47%" m={1}>
                     <TextField
                       fullWidth
                       id="outlined-name"
@@ -103,11 +103,11 @@ const Footer = ({ row, col, colOne, colTwo }) => {
                       className={classes.textField}
                       value={values.firstname}
                       onChange={handleChange('firstname')}
-                      margin="normal"
+                      margin="dense"
                       variant="outlined"
                     />
                   </Box>
-                  <Box width="47%" m={2}>
+                  <Box width="47%" m={1}>
                     <TextField
                       fullWidth
                       id="outlined-name"
@@ -115,11 +115,11 @@ const Footer = ({ row, col, colOne, colTwo }) => {
                       className={classes.textField}
                       value={values.lastname}
                       onChange={handleChange('lastname')}
-                      margin="normal"
+                      margin="dense"
                       variant="outlined"
                     />
                   </Box>
-                  <Box width="47%" m={2}>
+                  <Box width="47%" m={1}>
                     <TextField
                       fullWidth
                       id="outlined-name"
@@ -127,11 +127,11 @@ const Footer = ({ row, col, colOne, colTwo }) => {
                       className={classes.textField}
                       value={values.firstname}
                       onChange={handleChange('email')}
-                      margin="normal"
+                      margin="dense"
                       variant="outlined"
                     />
                   </Box>
-                  <Box width="47%" m={2}>
+                  <Box width="47%" m={1}>
                     <TextField
                       fullWidth
                       id="outlined-name"
@@ -139,21 +139,21 @@ const Footer = ({ row, col, colOne, colTwo }) => {
                       className={classes.textField}
                       value={values.lastname}
                       onChange={handleChange('phone')}
-                      margin="normal"
+                      margin="dense"
                       variant="outlined"
                     />
                   </Box>
-                  <Box m={2} width="99%">
+                  <Box m={1} width="99%">
                     <TextField
                       fullWidth
                       id="outlined-full-width"
                       label="Your message"
+                      margin="dense"
                       style={{ margin: 8 }}
                       placeholder="Your message"
-                      rows="4"
+                      rows="2"
                       value={values.residence}
                       onChange={handleChange('message')}
-                      margin="normal"
                       variant="outlined"
                       multiline={true}
                       InputLabelProps={{
@@ -163,6 +163,7 @@ const Footer = ({ row, col, colOne, colTwo }) => {
                     <Box m={2}>
                       <Button
                         size="large"
+                        margin="dense"
                         variant="outlined"
                         color="primary"
                         className={classes.button}

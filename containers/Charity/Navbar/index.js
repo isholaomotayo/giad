@@ -7,7 +7,8 @@ import NavbarWrapper, { MenuWrapper, Button } from './navbar.style';
 import Link from 'next/link';
 import logoImage from '../../../common/src/assets/image/charity/giadLogo.png';
 import heartImage from '../../../common/src/assets/image/charity/heart-red.png';
-
+import User from '../../../components/User';
+import Signout from '../../../components/Signout';
 const Navbar = () => {
   return (
     <NavbarWrapper className="navbar">
@@ -19,41 +20,63 @@ const Navbar = () => {
           className="logo"
           title="Global Initiative against Disasters"
         />
-        <MenuWrapper>
-          <AnchorLink className="smooth_scroll" href="/join#signup" offset={81}>
-            <span
-              style={{
-                fontSize: '10px',
-                width: '200px',
-                textAlign: 'center',
-                position: 'relative',
-                top: '-35px',
-                right: '-295px'
-              }}
-            >
-              <Link href="/join">
-                <span>PEOPLE'S AUTOMOTIVE, CONSTRUCTION</span>
-              </Link>
-            </span>
-            <span
-              style={{
-                fontSize: '10px',
-                width: '200px',
-                textAlign: 'center',
-                position: 'relative',
-                top: '-20px',
-                right: '-135px'
-              }}
-            >
-              <Link href="/join">
-                <span>AND MANUFACTURING CITY</span>
-              </Link>
-            </span>
 
-            <Link href="/join">
-              <span>Join the Initiative</span>
-            </Link>
-          </AnchorLink>
+        <MenuWrapper>
+          <User>
+            {({ data }) => {
+              const me = data ? data.me : null;
+              return (
+                <div>
+                  {me && (
+                    <>
+                      <Signout />
+                    </>
+                  )}
+                  {!me && (
+                    <AnchorLink
+                      className="smooth_scroll"
+                      href="/join#signup"
+                      offset={81}
+                    >
+                      <span
+                        style={{
+                          fontSize: '10px',
+                          width: '200px',
+                          textAlign: 'center',
+                          position: 'relative',
+                          top: '-35px',
+                          right: '-295px'
+                        }}
+                      >
+                        <Link href="/join">
+                          <span>PEOPLE'S AUTOMOTIVE, CONSTRUCTION</span>
+                        </Link>
+                      </span>
+                      <span
+                        style={{
+                          fontSize: '10px',
+                          width: '200px',
+                          textAlign: 'center',
+                          position: 'relative',
+                          top: '-20px',
+                          right: '-135px'
+                        }}
+                      >
+                        <Link href="/join">
+                          <span>AND MANUFACTURING CITY</span>
+                        </Link>
+                      </span>
+
+                      <Link href="/join">
+                        <span>Join the Initiative</span>
+                      </Link>
+                    </AnchorLink>
+                  )}
+                </div>
+              );
+            }}
+          </User>
+
           {/* <Button>
             <span className="text">SPREAD</span>
             <Image src={heartImage} alt="Charity Landing" />

@@ -18,6 +18,7 @@ import DrawerSection from '../containers/Charity/DrawerSection';
 import Signout from '../components/Signout';
 import PleaseSignIn from '../components/PleaseSignIn';
 import Profile from './register';
+import User from '../components/User';
 import {
   GlobalStyle,
   CharityWrapper,
@@ -106,7 +107,6 @@ export default function FullWidthTabs() {
             <ContentWrapper>
               <div className={classes.root} style={{ marginTop: '150px' }}>
                 <AppBar position="static" color="default">
-                  <Signout />
                   <Tabs
                     value={value}
                     onChange={handleChange}
