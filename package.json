@@ -71,6 +71,7 @@
     "react-select": "^3.0.4",
     "react-stickynode": "^2.1.1",
     "react-stripe-checkout": "^2.6.3",
+    "react-swipeable-views": "^0.13.3",
     "react-top-loading-bar": "^1.2.0",
     "react-transition-group": "^2.5.0",
     "reactstrap": "^8.1.1",

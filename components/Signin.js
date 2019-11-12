@@ -5,7 +5,7 @@ import Router from 'next/router';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import { CURRENT_USER_QUERY } from './User';
-
+import LoadingBar from 'react-top-loading-bar';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Box from '../reusecore/src/elements/Box';
@@ -72,6 +72,12 @@ class Signin extends Component {
     const { row, col } = this.props;
     return (
       <>
+        <LoadingBar
+          height={3}
+          color="#f11946"
+          onRef={ref => (this.LoadingBar = ref)}
+        />
+
         <Mutation
           mutation={SIGNIN_MUTATION}
           variables={this.state}
@@ -93,6 +99,7 @@ class Signin extends Component {
                           style={{ cursor: 'pointer' }}
                           onClick={e => {
                             e.preventDefault;
+
                             this.setState({ active: 'signup' });
                           }}
                         >
@@ -129,8 +136,10 @@ class Signin extends Component {
                       method="post"
                       onSubmit={async e => {
                         e.preventDefault();
+                        this.LoadingBar.continuousStart();
                         await signin();
-                        Router.push('/register');
+                        this.LoadingBar.complete();
+                        Router.push('/dashboard');
                         this.setState({ name: '', email: '', password: '' });
                       }}
                     >
@@ -170,7 +179,7 @@ class Signin extends Component {
                           onSubmit={async e => {
                             e.preventDefault();
                             await signup();
-                            Router.push('/register');
+                            Router.push('/dashboard');
                             this.setState({
                               name: '',
                               email: '',

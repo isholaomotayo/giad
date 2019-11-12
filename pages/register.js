@@ -24,7 +24,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-
+import LoadingBar from 'react-top-loading-bar';
 import PropTypes from 'prop-types';
 import Footer from '../containers/Charity/Footer';
 import Container from '../common/src/components/UI/Container';
@@ -38,6 +38,7 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import Error from '../components/ErrorMessage';
+import User from '../components/User';
 import {
   GlobalStyle,
   CharityWrapper,
@@ -131,6 +132,7 @@ const useStyles = makeStyles(theme => ({
 
 const Register = ({ row, col }, shows) => {
   const classes = useStyles();
+
   const [values, setValues] = React.useState({
     investmentSize: '',
     firstname: '',
@@ -175,7 +177,18 @@ const Register = ({ row, col }, shows) => {
     refereePhone: '',
     dateOfBirth: new Date(new Date().setFullYear(new Date().getFullYear() - 18))
   });
+  const complete = () => {
+    setValues({ loadingBarProgress: 100 });
+  };
 
+  const add = value => {
+    setValues({
+      loadingBarProgress: values.loadingBarProgress + value
+    });
+  };
+  const onLoaderFinished = () => {
+    setValues({ loadingBarProgress: 0 });
+  };
   const handleCheckboxChange = name => event => {
     let io = values.investmentOptionValues.options;
     io.forEach(io => {
@@ -245,23 +258,25 @@ const Register = ({ row, col }, shows) => {
                 {/* End of charity head section */}
                 {/* Start charity wrapper section */}
                 <CharityWrapper>
-                  <Sticky top={0} innerZ={9999} activeClass="sticky-nav-active">
-                    <Navbar />
-                  </Sticky>
-                  <DrawerProvider>
-                    <DrawerSection />
-                  </DrawerProvider>
                   <ContentWrapper>
                     <PromotionBlock />
                     <JivoSite.Widget id="fsXjkaUAe1" />
                     <NoSsr>
                       <Container width="1260px">
+                        <LoadingBar
+                          progress={values.loadingBarProgress}
+                          height={3}
+                          color="red"
+                          onLoaderFinished={() => onLoaderFinished()}
+                        />
+
                         <form
                           className={classes.container}
                           autoComplete="off"
                           method="post"
                           onSubmit={async e => {
                             e.preventDefault();
+                            //LoadingBar.add(20);
                             await register();
                             //Router.push('/register');
                           }}

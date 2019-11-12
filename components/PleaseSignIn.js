@@ -1,14 +1,14 @@
 import { Query } from 'react-apollo';
 import { CURRENT_USER_QUERY } from './User';
 import Signin from './Signin';
-
+import Join from '../pages/join';
 const PleaseSignIn = props => (
   <Query query={CURRENT_USER_QUERY}>
     {({ data, loading }) => {
       if (loading)
         return (
           <div>
-            <p
+            <div
               style={{
                 textAlign: 'center',
                 position: 'absolute',
@@ -29,7 +29,7 @@ const PleaseSignIn = props => (
               </div>
               <br />
               Loading...
-            </p>
+            </div>
             <style jsx>
               {`
                 .lds-grid {
@@ -108,10 +108,13 @@ const PleaseSignIn = props => (
         return (
           <>
             <h3>Please signin before you proceed</h3>
-            <Signin />
+            <Join />
           </>
         );
       }
+
+      localStorage.setItem('data', JSON.stringify(data));
+
       return props.children;
     }}
   </Query>
