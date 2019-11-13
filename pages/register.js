@@ -30,7 +30,7 @@ import Footer from '../containers/Charity/Footer';
 import Container from '../common/src/components/UI/Container';
 import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
-import PaystackButton from 'react-paystack';
+
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -45,7 +45,7 @@ import {
   ContentWrapper
 } from '../containers/Charity/charity.style';
 import states from '../components/StatesAndLGA';
-
+import Payment from '../components/Payments';
 import { DonateButton } from '../containers/Charity/DonateSection/donateSection.style';
 
 import { Mutation } from 'react-apollo';
@@ -648,7 +648,7 @@ const Register = ({ row, col }, shows) => {
                           </DonateButton>
                         </form>
                         <Box width="30%" m={3}>
-                          <Payment />
+                          <Payment amount={5000000} />
                         </Box>
                       </Container>
                     </NoSsr>
@@ -700,51 +700,3 @@ Register.defaultProps = {
   }
 };
 export default Register;
-
-class Payment extends Component {
-  state = {
-    key: 'pk_live_efd0e8585b6a1467dfd3f439385842a18223080b', //PAYSTACK PUBLIC KEY
-    email: 'user@pacmgiad.com', // customer email
-    amount: 5000000 //equals NGN100,
-  };
-
-  callback = response => {
-    console.log(response); // card charged successfully, get reference here
-  };
-
-  close = () => {
-    console.log('Payment closed');
-  };
-
-  getReference = () => {
-    //you can put any unique reference implementation code here
-    let text = '';
-    let possible =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=';
-
-    for (let i = 0; i < 15; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-  };
-
-  render() {
-    return (
-      <div>
-        <PaystackButton
-          class="butn"
-          text="Make Payment"
-          callback={this.callback}
-          close={this.close}
-          disabled={false}
-          embed={false}
-          reference={this.getReference()}
-          email={this.state.email}
-          amount={this.state.amount}
-          paystackkey={this.state.key}
-          tag="button"
-        ></PaystackButton>
-      </div>
-    );
-  }
-}

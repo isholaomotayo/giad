@@ -19,6 +19,7 @@ import Signout from '../components/Signout';
 import PleaseSignIn from '../components/PleaseSignIn';
 import Profile from './register';
 import User from '../components/User';
+import Payment from '../components/Payments';
 import {
   GlobalStyle,
   CharityWrapper,
@@ -131,6 +132,22 @@ export default function FullWidthTabs() {
                   </TabPanel>
                   <TabPanel value={value} index={1} dir={theme.direction}>
                     <h3>Investments</h3>
+
+                    <User>
+                      {({ data }) => {
+                        const me = data ? data.me : null;
+                        return (
+                          <div>
+                            {me && (
+                              <>
+                                <Payment amount={500000000} />
+                              </>
+                            )}
+                            {!me && <div>Please login to make payments </div>}
+                          </div>
+                        );
+                      }}
+                    </User>
                   </TabPanel>
                   <TabPanel value={value} index={2} dir={theme.direction}>
                     <h3>Resources</h3>
