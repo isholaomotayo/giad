@@ -90,6 +90,8 @@ class Signin extends Component {
                   <Box className="col" {...col}>
                     <ContentArea>
                       <Heading>
+                        {this.props.alertText && this.props.alertText}
+                        <br />
                         Create an account{' '}
                         <span>or Sigin in with your exisiting account</span>
                       </Heading>

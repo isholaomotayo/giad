@@ -3,7 +3,7 @@ import { CURRENT_USER_QUERY } from './User';
 import Signin from './Signin';
 import Join from '../pages/join';
 const PleaseSignIn = props => (
-  <Query query={CURRENT_USER_QUERY}>
+  <Query {...props} query={CURRENT_USER_QUERY}>
     {({ data, loading }) => {
       if (loading)
         return (
@@ -103,13 +103,8 @@ const PleaseSignIn = props => (
             </style>
           </div>
         );
-      if (!data.me) {
-        return (
-          <>
-            <h3>Please signin before you proceed</h3>
-            <Join />
-          </>
-        );
+      if (!data || !data.me) {
+        return <Join alertText="Please signin before you proceed" />;
       }
 
       return props.children;

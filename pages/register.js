@@ -74,10 +74,12 @@ const REGISTER_MUTATION = gql`
     $nationalityAtBirth: String
     $currentNationality: String
     $passportNumber: String
-    $passportExpirtDate: String
+    $passportExpiryDate: String
     $investmentOption: String
     $refereeName: String
     $refereePhone: String
+    $refereeBank: String
+    $refereeAccountNumber: String
   ) {
     createUserProfile(
       investmentSize: $investmentSize
@@ -101,10 +103,12 @@ const REGISTER_MUTATION = gql`
       nationalityAtBirth: $nationalityAtBirth
       currentNationality: $currentNationality
       passportNumber: $passportNumber
-      passportExpirtDate: $passportExpirtDate
+      passportExpiryDate: $passportExpiryDate
       investmentOption: $investmentOption
       refereeName: $refereeName
       refereePhone: $refereePhone
+      refereeBank: $refereeBank
+      refereeAccountNumber: $refereeAccountNumber
     ) {
       firstname
       middlename
@@ -172,9 +176,11 @@ const Register = ({ row, col }, shows) => {
     nationalityAtBirth: '',
     currentNationality: '',
     passportNumber: '',
-    passportExpirtDate: '',
+    passportExpiryDate: '',
     refereeName: '',
     refereePhone: '',
+    refereeBank: '',
+    refereeAccountNumber: '',
     dateOfBirth: new Date(new Date().setFullYear(new Date().getFullYear() - 18))
   });
   const complete = () => {
@@ -625,8 +631,8 @@ const Register = ({ row, col }, shows) => {
                               id="outlined-name-intro"
                               label="Account Number  of referrer"
                               className={classes.textField}
-                              value={values.refereeAccount}
-                              onChange={handleChange('refereeAccount')}
+                              value={values.refereeAccountNumber}
+                              onChange={handleChange('refereeAccountNumber')}
                               margin="normal"
                               variant="outlined"
                             />

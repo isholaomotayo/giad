@@ -23,7 +23,7 @@ import {
   ContentWrapper
 } from '../containers/Charity/charity.style';
 
-const Join = shows => {
+const Join = props => {
   return (
     <ThemeProvider theme={charityTheme}>
       <Fragment>
@@ -54,9 +54,15 @@ const Join = shows => {
             <DrawerSection />
           </DrawerProvider>
           <ContentWrapper>
+            <br />
+            <br />
+            <br />
             <HumanityBlock />
-            <Signin />
-            {/* <DonateSection /> */}
+            <center>
+              <h4>{props && props.alertText}</h4>
+            </center>
+
+            <Signin {...props} />
           </ContentWrapper>
           <Footer />
         </CharityWrapper>
