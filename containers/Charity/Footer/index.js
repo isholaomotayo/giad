@@ -67,7 +67,7 @@ const Footer = ({ row, col, colOne, colTwo }) => {
               content="PHONE: 0703 481 0526, 0817 150 3550, 0803 452 4432"
             />
             <Link href="#1">
-              <a className="mail">info@rpacmgiad.org</a>
+              <a className="mail">info@pacmgiad.org</a>
             </Link>
             <SelectWrapper>
               <select aria-label="language switcher">

@@ -39,6 +39,7 @@ class Payment extends React.Component {
                 {me && (
                   <>
                     <PaystackButton
+                      metadata={{ userId: me.id }}
                       class="butn"
                       text="Make Payment"
                       callback={this.callback}
