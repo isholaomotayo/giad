@@ -9,6 +9,20 @@ const CURRENT_USER_QUERY = gql`
       email
       name
       permissions
+        payment{
+                userEmail
+                description
+                ip_address
+                currency
+                channel
+                created_at
+                paid_at
+                gateway_response
+                message
+                amount
+                reference
+                status
+              }
       orders {
         id
       }

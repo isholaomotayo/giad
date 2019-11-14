@@ -20,6 +20,7 @@ import PleaseSignIn from '../components/PleaseSignIn';
 import Profile from './register';
 import User from '../components/User';
 import Payment from '../components/Payments';
+import EnhancedTable from '../components/table';
 import {
   GlobalStyle,
   CharityWrapper,
@@ -62,6 +63,44 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function toPosition(value) {
+  let input = String(value).split('');
+  let mapData = {
+    "0": "First",
+    "1": "Second",
+    "2": "Third",
+    "3": "Fourth",
+    "4": "Fifth",
+    "5": "Sixth",
+    "6": "Seventh",
+    "7": "Eighth",
+    "8": "Ninth",
+    "9": "Tenth"
+  };
+  let output = '';
+  var tempArray = []
+  for (let i = 0; i < input.length; i++) {
+    tempArray.push(mapData[input[i]])
+  }
+  output = tempArray.join(' ');
+  return output;
+  }
+
+  const formatDate = (date) => new Date(date).toString().substr(0,24)
+const rows= (me)=> me.payment
+.map( p => {return { ...p , amount :(p.amount/100)}})
+.filter(p => { 
+  
+  return p.amount > "50000"})
+.map( (payment , index )=> {
+  
+  return {name : toPosition(index)+ ' Traunch',
+  amount: parseFloat(payment.amount).toLocaleString("en-GB", {
+    style: "currency",
+    currency: "NGN"
+  }),
+  paid_at : formatDate(payment.paid_at),
+  reference : payment.reference}} ) 
 export default function FullWidthTabs() {
   const classes = useStyles();
   const theme = useTheme();
@@ -79,7 +118,7 @@ export default function FullWidthTabs() {
     <ThemeProvider theme={charityTheme}>
       <>
         <PleaseSignIn>
-          {/* Start charity head section */}
+          {/* Start charity head section */ }
           <Head>
             <title>GIAD | Global Initiative Axgainst Disasters</title>
             <meta name="Description" content="React next landing page" />
@@ -140,7 +179,9 @@ export default function FullWidthTabs() {
                           <div>
                             {me && (
                               <>
+                             
                                 <Payment amount={500000000} />
+                                <EnhancedTable rows = {  rows(me)}/>
                               </>
                             )}
                             {!me && <div>Please login to make payments </div>}

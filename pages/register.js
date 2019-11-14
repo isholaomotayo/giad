@@ -276,6 +276,10 @@ const Register = ({ row, col }, shows) => {
                           onLoaderFinished={() => onLoaderFinished()}
                         />
 
+                        <br />
+                        <Box width="40%" m={3}>
+                          <Payment amount={5000000} />
+                        </Box>
                         <form
                           className={classes.container}
                           autoComplete="off"
@@ -647,9 +651,7 @@ const Register = ({ row, col }, shows) => {
                             Save Profile{' '}
                           </DonateButton>
                         </form>
-                        <Box width="30%" m={3}>
-                          <Payment amount={5000000} />
-                        </Box>
+                        <Box width="30%" m={3}></Box>
                       </Container>
                     </NoSsr>
                   </ContentWrapper>
