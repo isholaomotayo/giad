@@ -262,23 +262,121 @@ export const milestoneData = {
   counterItems: [
     {
       id: 1,
-      amount: '15',
-      title: 'SKills Upgrade Tracks'
+      amount: 'Investment Opportunities',
+      title: [
+        'Access direct Africa/Global market linkages',
+        'Access to fiscal policy and monetary incentives',
+        'Pioneer status, Tax holidays',
+        'Profit Repatriation',
+        'Export expansion grant',
+        'Zero import duty on machinery/equipment',
+        'Constitutional guarantees against nationalization',
+        'Infrastructure support',
+        'Ease of doing business support/R & D Tax refund',
+        'Capital allowance',
+        'Investment promotion and protection agreement',
+        'World-class production environment',
+        'Sharing of common labour pool and expertise',
+        'Local Content Support/patronage by government'
+      ]
     },
     {
       id: 2,
-      amount: '53',
-      title: 'Industries Developments'
+      amount: 'Industry Opportunities',
+      title: [
+        'Automobile and component parts manufacturing plants',
+        'Textile and garment industry ',
+        'Agro-allied & food processing',
+        'Medical Pharmaceuticals',
+        'Plumbing and fixtures',
+        'Electrical electronics',
+        'Chemical/ Allied industry',
+        'Info-tech/ Communications',
+        'Wood and furniture',
+        'Plastics',
+        'Ceramics; Tiles',
+        'Construction, building and extraction',
+        'Metal Processing'
+      ]
     },
     {
       id: 3,
-      amount: '71',
-      title: 'New Products Developed'
+      amount: 'Dedicated Projects/Concept plan',
+      title: [
+        'Agro business/food processing (10%)',
+        'Medical/ pharmaceuticals (10%)',
+        'Automotive manufacturing hub (10%)',
+        'Tourism/Centralized exhibition/malls (10%)',
+        'Commercial/ Construction and Housing (5%)',
+        'Manufacturing pre-built facilities (16.5%)',
+        'Manufacturing/ ICT hub (16.5)',
+        'Education hub/ Training and research academy (15%)',
+        'Aviation Industry (2.5%)',
+        'Financial institutes, utilities, e-train stations, regional market (2.5%)',
+        'Sporting facilities (2.5%)',
+        'Daily needs manufacturing hub (15%)',
+        'Others: precision, plastic equipment, press shop, foundries, Iron & Steel, etc (1%)'
+      ]
     },
     {
       id: 4,
-      amount: '18K',
-      title: 'Potential Jobs Cerated  '
+      amount: 'Offers by Park',
+      title: [
+        'Commercial plots',
+        'Workshops',
+        'Offices',
+        'Outlets',
+        'Manufacturing prebuilt facilities',
+        'Residential complex',
+        'Neighbourhood Markets'
+      ]
+    },
+    {
+      id: 5,
+      amount: 'Land Tenor',
+      title: [
+        '99-year Lease Concession',
+        'Government approved/Certificate of occupancy'
+      ]
+    },
+    {
+      id: 6,
+      amount: 'Dedicated Infrastructures',
+      title: [
+        'Independent Power plant',
+        'Rails/air/roads',
+        'Water/dam',
+        'Sewage/recycling and ICT'
+      ]
+    },
+    {
+      id: 7,
+      amount: 'Allotment Standard',
+      title: ['Minimum: 3000 Sqm/plot', 'Other Sizes: On request']
+    },
+    {
+      id: 8,
+      amount: 'Total Land Available',
+      title: ['	2000 Hectares (Greenfield)  ']
+    },
+    {
+      id: 9,
+      amount: ' Collaborating Partners',
+      title: [
+        'Foreign Direct Investors',
+        'Venture capital investor(s)/ prelim financier',
+        'Private placement/ Revenue Generators',
+        'Legal Partners',
+        'Construction Partners',
+        'Design Partners',
+        'ICT Partners,',
+        'Media Partners,',
+        'Marketing Partners,',
+        'Security Partners,',
+        'Government/ Statutory Partners,',
+        'Project Management Partners; and',
+        'Banking and Insurance Partners(s).'
+      ]
     }
   ]
 };

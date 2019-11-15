@@ -28,14 +28,18 @@ const MilestoneBlock = () => {
           </Link>
         </MilestoneCard>
       </BlockWrapper>
-      {/* <CounterWrapper>
+      <CounterWrapper>
         {counterItems.map(item => (
           <CounterItem key={`counter_key${item.id}`}>
             <Heading as="h3" content={item.amount} />
-            <Text content={item.title} />
+            <ul>
+              {item.title.map(i => (
+                <li key={i}>{i}</li>
+              ))}
+            </ul>
           </CounterItem>
         ))}
-      </CounterWrapper> */}
+      </CounterWrapper>
     </Container>
   );
 };

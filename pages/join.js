@@ -8,7 +8,6 @@ import { DrawerProvider } from '../common/src/contexts/DrawerContext';
 import Navbar from '../containers/Charity/Navbar';
 import DrawerSection from '../containers/Charity/DrawerSection';
 import HumanityBlock from '../containers/Charity/HumanityBlock';
-import DonateSection from '../containers/Charity/DonateSection';
 
 import Footer from '../containers/Charity/Footer';
 

@@ -125,12 +125,13 @@ export const CounterWrapper = styled.div`
 
 export const CounterItem = styled.div`
   text-align: center;
+  margin-bottom: 20px;
   @media only screen and (max-width: 480px) {
     margin-bottom: 30px;
   }
 
   h3 {
-    font-size: 50px;
+    font-size: 20px;
     line-height: 60px;
     font-weight: 300;
     @media only screen and (max-width: 1440px) {
@@ -138,14 +139,14 @@ export const CounterItem = styled.div`
       line-height: 46px;
     }
     @media only screen and (max-width: 1360px) {
-      font-size: 34px;
+      font-size: 20px;
       line-height: 40px;
       margin-bottom: 13px;
     }
     @media only screen and (max-width: 991px) {
-      font-size: 30px;
+      font-size: 20px;
       line-height: 36px;
-      margin-bottom: 10px;
+      margin-bottom: 40px;
     }
   }
 
