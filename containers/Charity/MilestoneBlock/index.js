@@ -32,7 +32,7 @@ const MilestoneBlock = () => {
         {counterItems.map(item => (
           <CounterItem key={`counter_key${item.id}`}>
             <Heading as="h3" content={item.amount} />
-            <ul>
+            <ul style={{ fontSize: '13px' }}>
               {item.title.map(i => (
                 <li key={i}>{i}</li>
               ))}

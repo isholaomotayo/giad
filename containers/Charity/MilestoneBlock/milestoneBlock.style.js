@@ -124,7 +124,7 @@ export const CounterWrapper = styled.div`
 `;
 
 export const CounterItem = styled.div`
-  text-align: center;
+  text-align: left;
   margin-bottom: 20px;
   @media only screen and (max-width: 480px) {
     margin-bottom: 30px;

@@ -315,9 +315,29 @@ export const milestoneData = {
         'Financial institutes, utilities, e-train stations, regional market (2.5%)',
         'Sporting facilities (2.5%)',
         'Daily needs manufacturing hub (15%)',
-        'Others: precision, plastic equipment, press shop, foundries, Iron & Steel, etc (1%)'
+        'Precision, plastic equipment, press shop, foundries, Iron & Steel, etc (1%)'
       ]
     },
+    {
+      id: 9,
+      amount: ' Collaborating Partners',
+      title: [
+        'Foreign Direct Investors',
+        'Venture capital investor(s)/ prelim financier',
+        'Private placement/ Revenue Generators',
+        'Legal Partners',
+        'Construction Partners',
+        'Design Partners',
+        'ICT Partners,',
+        'Media Partners,',
+        'Marketing Partners,',
+        'Security Partners,',
+        'Government/ Statutory Partners,',
+        'Project Management Partners; and',
+        'Banking and Insurance Partners(s).'
+      ]
+    },
+
     {
       id: 4,
       amount: 'Offers by Park',
@@ -358,25 +378,6 @@ export const milestoneData = {
       id: 8,
       amount: 'Total Land Available',
       title: ['	2000 Hectares (Greenfield)  ']
-    },
-    {
-      id: 9,
-      amount: ' Collaborating Partners',
-      title: [
-        'Foreign Direct Investors',
-        'Venture capital investor(s)/ prelim financier',
-        'Private placement/ Revenue Generators',
-        'Legal Partners',
-        'Construction Partners',
-        'Design Partners',
-        'ICT Partners,',
-        'Media Partners,',
-        'Marketing Partners,',
-        'Security Partners,',
-        'Government/ Statutory Partners,',
-        'Project Management Partners; and',
-        'Banking and Insurance Partners(s).'
-      ]
     }
   ]
 };
