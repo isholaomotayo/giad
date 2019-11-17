@@ -129,11 +129,13 @@ export const CounterItem = styled.div`
   @media only screen and (max-width: 480px) {
     margin-bottom: 30px;
   }
-
+  li {
+    list-style-type: square;
+  }
   h3 {
     font-size: 20px;
     line-height: 60px;
-    font-weight: 300;
+    font-weight: 600;
     @media only screen and (max-width: 1440px) {
       font-size: 40px;
       line-height: 46px;

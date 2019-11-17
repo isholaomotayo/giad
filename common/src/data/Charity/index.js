@@ -36,7 +36,7 @@ export const menuItems = [
     offset: '81'
   },
   {
-    label: 'Our Milestone',
+    label: 'Projects',
     path: '/#milestone',
     offset: '81'
   }
