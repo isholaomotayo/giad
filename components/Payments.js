@@ -3,7 +3,7 @@ import User from './User';
 
 class Payment extends React.Component {
   state = {
-    key: 'pk_live_efd0e8585b6a1467dfd3f439385842a18223080b', //PAYSTACK PUBLIC KEY
+    key: 'pk_live_efd0e8585b6a1467dfd3f439385842a18223080b', //PAYSTACK PUBLIC KEY  pk_live_efd0e8585b6a1467dfd3f439385842a18223080b  pk_test_58c81e562de583ea35a609e1b5cbe0a13d647923
     email: this.props.email, // customer email
     amount: this.props.amount //equals NGN 50k,
   };
@@ -16,17 +16,14 @@ class Payment extends React.Component {
     console.log('Payment closed');
   };
 
-  getReference = () => {
-    //you can put any unique reference implementation code here
-    let text = '';
-    let possible =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=';
-
-    for (let i = 0; i < 15; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-  };
+  getReference = () =>
+    Math.random()
+      .toString(36)
+      .substring(2, 15) +
+    Math.random()
+      .toString(36)
+      .substring(2, 15) +
+    Date.now().toString(36);
 
   render() {
     return (
