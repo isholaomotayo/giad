@@ -8,34 +8,52 @@ const CURRENT_USER_QUERY = gql`
       id
       email
       name
-      permissions
-        payment{
-                userEmail
-                description
-                ip_address
-                currency
-                channel
-                created_at
-                paid_at
-                gateway_response
-                message
-                amount
-                reference
-                status
-              }
-      orders {
-        id
+      profilePaymentMade
+      profile {
+        investmentSize
+        firstname
+        middlename
+        lastname
+        sex
+        phone
+        dateOfBirth
+        nextOfKin1_name
+        nextOfKin1_relationship
+        nextOfKin1_email
+        nextOfKin2_name
+        nextOfKin2_relationship
+        nextOfKin2_email
+        permanentResidentialAddress
+        stateOfOrigin
+        LGA
+        meansOfIdentification
+        IDNumber
+        nationalityAtBirth
+        currentNationality
+        passportNumber
+        passportExpiryDate
+        investmentOption
+        refereeName
+        refereePhone
+        refereeBank
+        refereeAccountNumber
+        userImage
+        IDImage
       }
-      cart {
-        id
-        quantity
-        item {
-          id
-          price
-          image
-          title
-          description
-        }
+      permissions
+      payment {
+        userEmail
+        description
+        ip_address
+        currency
+        channel
+        created_at
+        paid_at
+        gateway_response
+        message
+        amount
+        reference
+        status
       }
     }
   }

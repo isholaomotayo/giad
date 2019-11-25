@@ -51,7 +51,7 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import Error from '../components/ErrorMessage';
-import User from '../components/User';
+import User, { CURRENT_USER_QUERY } from '../components/User';
 import {
   GlobalStyle,
   CharityWrapper,
@@ -63,6 +63,18 @@ import { DonateButton } from '../containers/Charity/DonateSection/donateSection.
 
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+
+const UPDATE_PAYMENT_STATUS_MUTATION = gql`
+  mutation UPDATE_PAYMENT_STATUS_MUTATION(
+    $id: ID!
+    $profilePaymentMade: Boolean!
+  ) {
+    updateUserPaymentStatus(id: $id, profilePaymentMade: $profilePaymentMade) {
+      email
+      profilePaymentMade
+    }
+  }
+`;
 
 const REGISTER_MUTATION = gql`
   mutation REGISTER_MUTATION(
@@ -151,17 +163,47 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Register = ({ row, col }, shows) => {
+const Register = props => {
   const classes = useStyles();
-
+  const {
+    investmentSize,
+    firstname,
+    middlename,
+    lastname,
+    sex,
+    phone,
+    dateOfBirth,
+    nextOfKin1_name,
+    nextOfKin1_relationship,
+    nextOfKin1_email,
+    nextOfKin2_name,
+    nextOfKin2_relationship,
+    nextOfKin2_email,
+    permanentResidentialAddress,
+    stateOfOrigin,
+    LGA,
+    meansOfIdentification,
+    IDNumber,
+    nationalityAtBirth,
+    currentNationality,
+    passportNumber,
+    passportExpiryDate,
+    investmentOption,
+    refereeName,
+    refereePhone,
+    refereeBank,
+    refereeAccountNumber,
+    userImage,
+    IDImage
+  } = props.me.profile;
   const [values, setValues] = React.useState({
-    files:[],
-    investmentSize: '',
-    firstname: '',
-    middlename: '',
-    lastname: '',
-    sex: '',
-    phone: '',
+    files: [],
+    investmentSize: investmentSize || '',
+    firstname: firstname || '',
+    middlename: middlename || '',
+    lastname: lastname || '',
+    sex: sex || '',
+    phone: phone || '',
     investmentOptionValues: {
       options: [
         { id: 1, value: 'Edupark', checked: false },
@@ -177,32 +219,42 @@ const Register = ({ row, col }, shows) => {
 
       values: []
     },
-    investmentOption: '',
-    email: '',
-    phone: '',
-    nextOfKin1_name: '',
-    nextOfKin1_relationship: '',
-    nextOfKin1_email: '',
-    nextOfKin2_name: '',
-    nextOfKin2_relationship: '',
-    nextOfKin2_email: '',
-    permanentResidentialAddress: '',
-    stateOfOrigin: '',
-    LGA: '',
-    meansOfIdentification: '',
-    IDNumber: '',
-    nationalityAtBirth: '',
-    currentNationality: '',
-    passportNumber: '',
-    passportExpiryDate: '',
-    refereeName: '',
-    refereePhone: '',
-    refereeBank: '',
-    refereeAccountNumber: '',
-    userImage:'',
-    IDImage:'',
-    dateOfBirth: new Date(new Date().setFullYear(new Date().getFullYear() - 18))
+    investmentOption: investmentOption || '',
+    email: props.me.email || '',
+    phone: phone || '',
+    nextOfKin1_name: nextOfKin1_name || '',
+    nextOfKin1_relationship: nextOfKin1_relationship || '',
+    nextOfKin1_email: nextOfKin1_email || '',
+    nextOfKin2_name: nextOfKin2_name || '',
+    nextOfKin2_relationship: nextOfKin2_relationship || '',
+    nextOfKin2_email: nextOfKin2_email || '',
+    permanentResidentialAddress: permanentResidentialAddress || '',
+    stateOfOrigin: stateOfOrigin || '',
+    LGA: LGA || '',
+    meansOfIdentification: meansOfIdentification || '',
+    IDNumber: IDNumber || '',
+    nationalityAtBirth: nationalityAtBirth || '',
+    currentNationality: currentNationality || '',
+    passportNumber: passportNumber || '',
+    passportExpiryDate: passportExpiryDate || '',
+    refereeName: refereeName || '',
+    refereePhone: refereePhone || '',
+    refereeBank: refereeBank || '',
+    refereeAccountNumber: refereeAccountNumber || '',
+    userImage: userImage || '',
+    IDImage: IDImage || '',
+    dateOfBirth:
+      dateOfBirth ||
+      new Date(new Date().setFullYear(new Date().getFullYear() - 18))
   });
+
+  let newInvestmentCheckedValues = values.investmentOptionValues.options.map(
+    opt =>
+      (opt.checked =
+        Math.sign(values.investmentOption.split(',').indexOf(opt.value)) !== -1
+          ? 1
+          : 0)
+  );
   const complete = () => {
     setValues({ loadingBarProgress: 100 });
   };
@@ -254,52 +306,73 @@ const Register = ({ row, col }, shows) => {
   const handleDateChange = date => date => {
     setValues({ ...values, dateOfBirth: date });
   };
+  const { me } = props;
   return (
     <>
-      <PleaseSignIn>
-        <Mutation
-          mutation={REGISTER_MUTATION}
-          variables={values}
-          //refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-        >
-          {(register, { error, loading }) => (
-            <ThemeProvider theme={charityTheme}>
-              <Fragment>
-                {/* Start charity head section */}
-                <Head>
-                  <title>GIAD | Global Initiative Axgainst Disasters</title>
-                  <meta
-                    name="Description"
-                    content="GIAD | Global Initiative Against Disasters"
-                  />
-                  <meta name="theme-color" content="#0071bc" />
-                  <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0"
-                  />
-                  {/* Load google fonts */}
-                </Head>
-                <ResetCSS />
-                <GlobalStyle />
-                {/* End of charity head section */}
-                {/* Start charity wrapper section */}
-                <CharityWrapper>
-                  <ContentWrapper>
-                    <PromotionBlock />
-                   
-                    <NoSsr>
-                      <Container width="1260px">
-                        <LoadingBar
-                          progress={values.loadingBarProgress}
-                          height={3}
-                          color="red"
-                          onLoaderFinished={() => onLoaderFinished()}
-                        />
+      <Mutation
+        mutation={REGISTER_MUTATION}
+        variables={values}
+        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+      >
+        {(register, { error, loading }) => (
+          <ThemeProvider theme={charityTheme}>
+            <Fragment>
+              {/* Start charity head section */}
+              <Head>
+                <title>GIAD | Global Initiative Axgainst Disasters</title>
+                <meta
+                  name="Description"
+                  content="GIAD | Global Initiative Against Disasters"
+                />
+                <meta name="theme-color" content="#0071bc" />
+                <meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1.0"
+                />
+                {/* Load google fonts */}
+              </Head>
+              <ResetCSS />
+              <GlobalStyle />
+              {/* End of charity head section */}
+              {/* Start charity wrapper section */}
+              <CharityWrapper>
+                <ContentWrapper>
+                  <PromotionBlock />
 
-                        <br />
+                  <NoSsr>
+                    <Container width="1260px">
+                      <LoadingBar
+                        progress={values.loadingBarProgress}
+                        height={3}
+                        color="red"
+                        onLoaderFinished={() => onLoaderFinished()}
+                      />
+
+                      <br />
+                      {!me.profilePaymentMade && (
                         <Box width="40%" m={3}>
-                          <Payment amount={5000000} />
+                          {console.log(me)}
+                          <Mutation
+                            mutation={UPDATE_PAYMENT_STATUS_MUTATION}
+                            variables={{ id: me.id, profilePaymentMade: true }}
+                            refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+                          >
+                            {(
+                              updateUserPaymentStatus,
+                              { error, loading, data }
+                            ) => (
+                              <Payment
+                                amount={5000000}
+                                email={me.email}
+                                callback={async () =>
+                                  await updateUserPaymentStatus()
+                                }
+                              />
+                            )}
+                          </Mutation>
                         </Box>
+                      )}
+                      {me.profilePaymentMade && (
                         <form
                           className={classes.container}
                           autoComplete="off"
@@ -307,46 +380,47 @@ const Register = ({ row, col }, shows) => {
                           onSubmit={async e => {
                             e.preventDefault();
                             //LoadingBar.add(20);
-                            await register();
+                            let data = await register();
+                            console.log(data);
                             //Router.push('/register');
                           }}
                         >
-                        <Box width="40%" m={3}>
-                        <FilePond
-                        labelIdle= 'Drag & Drop your passport photo or Click here to browse'
-    
-                            allowMultiple={false}
-                            maxFiles={1}
-                            server={createCloudinary(
-                              'omotayo',
-                              'pacmgiad',
-                              'userImage',
-                              ({url}) => setValues({...values , userImage:url})
-                            )}
-                              >
-                                {values.files.map(file => (
-                                  <File key={file} source={file} />
-                                ))}
-                              </FilePond>
-                        </Box>
-                        <Box width="40%" m={3}>
-                        <FilePond
-                        labelIdle= 'Drag & Drop your Valid IDcard or or click here to browse'
-    
-                            allowMultiple={false}
-                            maxFiles={1}
-                            server={createCloudinary(
-                              'omotayo',
-                              'pacmgiad',
-                              'IDImage',
-                              ({url}) => setValues({...values , IDImage:url})
-                            )}
-                              >
-                                {values.files.map(file => (
-                                  <File key={file} source={file} />
-                                ))}
-                              </FilePond>
-                        </Box>
+                          <Box width="40%" m={3}>
+                            <FilePond
+                              labelIdle="Drag & Drop your passport photo or Click here to browse"
+                              allowMultiple={false}
+                              maxFiles={1}
+                              server={createCloudinary(
+                                'omotayo',
+                                'pacmgiad',
+                                'userImage',
+                                ({ url }) =>
+                                  setValues({ ...values, userImage: url })
+                              )}
+                            >
+                              {values.files.map(file => (
+                                <File key={file} source={file} />
+                              ))}
+                            </FilePond>
+                          </Box>
+                          <Box width="40%" m={3}>
+                            <FilePond
+                              labelIdle="Drag & Drop your Valid IDcard or or click here to browse"
+                              allowMultiple={false}
+                              maxFiles={1}
+                              server={createCloudinary(
+                                'omotayo',
+                                'pacmgiad',
+                                'IDImage',
+                                ({ url }) =>
+                                  setValues({ ...values, IDImage: url })
+                              )}
+                            >
+                              {values.files.map(file => (
+                                <File key={file} source={file} />
+                              ))}
+                            </FilePond>
+                          </Box>
                           <Box width="40%" m={3}>
                             <FormControl
                               component="fieldset"
@@ -707,34 +781,22 @@ const Register = ({ row, col }, shows) => {
                             Save Profile{' '}
                           </DonateButton>
                         </form>
-                        <Box width="30%" m={3}></Box>
-                      </Container>
-                    </NoSsr>
-                  </ContentWrapper>
-                  <Footer />
-                </CharityWrapper>
-                {/* End of charity wrapper section */}
-              </Fragment>
-            </ThemeProvider>
-          )}
-        </Mutation>
-      </PleaseSignIn>
+                      )}
+                      <Box width="30%" m={3}></Box>
+                    </Container>
+                  </NoSsr>
+                </ContentWrapper>
+                <Footer />
+              </CharityWrapper>
+              {/* End of charity wrapper section */}
+            </Fragment>
+          </ThemeProvider>
+        )}
+      </Mutation>
     </>
   );
 };
 
-// Index.getInitialProps = async function({ ctx }) {
-//   const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-//   const data = await res.json();
-
-//   console.log(`Show data fetched. Count: ${data.length}`);
-
-//   return {
-//     shows: data.map(entry => entry.show)
-//   };
-// };
-
-// PromotionBlock style props
 Register.propTypes = {
   row: PropTypes.object,
   col: PropTypes.object

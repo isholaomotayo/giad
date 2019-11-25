@@ -4,17 +4,22 @@ import User from './User';
 class Payment extends React.Component {
   state = {
     key: 'pk_live_efd0e8585b6a1467dfd3f439385842a18223080b', //PAYSTACK PUBLIC KEY  pk_live_efd0e8585b6a1467dfd3f439385842a18223080b  pk_test_58c81e562de583ea35a609e1b5cbe0a13d647923
-    email: this.props.email, // customer email
+    // key: 'pk_test_58c81e562de583ea35a609e1b5cbe0a13d647923', //PAYSTACK PUBLIC KEY  pk_live_efd0e8585b6a1467dfd3f439385842a18223080b  pk_test_58c81e562de583ea35a609e1b5cbe0a13d647923
+    //email: this.props.email, // customer email
     amount: this.props.amount //equals NGN 50k,
   };
 
-  callback = response => {
-    console.log(response); // card charged successfully, get reference here
-  };
+  callback =
+    this.props.callback ||
+    (response => {
+      console.log(response); // card charged successfully, get reference here
+    });
 
-  close = () => {
-    console.log('Payment closed');
-  };
+  close =
+    this.props.close ||
+    (() => {
+      console.log('Payment closed');
+    });
 
   getReference = () =>
     Math.random()

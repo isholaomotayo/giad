@@ -145,6 +145,12 @@ export default function FullWidthTabs() {
               <DrawerSection />
             </DrawerProvider>
             <ContentWrapper>
+            <User>
+                      {({ data }) => {
+                        const me = data ? data.me : null;
+                        return (
+                          <div>
+                            {me && (
               <div className={classes.root} style={{ marginTop: '150px' }}>
                 <AppBar position="static" color="default">
                   <Tabs
@@ -167,28 +173,18 @@ export default function FullWidthTabs() {
                   onChangeIndex={handleChangeIndex}
                 >
                   <TabPanel value={value} index={0} dir={theme.direction}>
-                    <Profile />
+                    <Profile me={me} />
                   </TabPanel>
                   <TabPanel value={value} index={1} dir={theme.direction}>
                     <h3>Investments</h3>
 
-                    <User>
-                      {({ data }) => {
-                        const me = data ? data.me : null;
-                        return (
-                          <div>
-                            {me && (
+                    
                               <>
                              
                                 <Payment amount={500000000} />
                                 <EnhancedTable rows = {  rows(me)}/>
                               </>
-                            )}
-                            {!me && <div>Please login to make payments </div>}
-                          </div>
-                        );
-                      }}
-                    </User>
+                        
                   </TabPanel>
                   <TabPanel value={value} index={2} dir={theme.direction}>
                     <h3>Resources</h3>
@@ -201,8 +197,15 @@ export default function FullWidthTabs() {
                   </TabPanel>
                 </SwipeableViews>
               </div>
+               )}
+               {!me && <div>Please login to make payments </div>}
+             </div>
+           );
+         }}
+       </User>
             </ContentWrapper>
           </CharityWrapper>
+         
         </PleaseSignIn>
       </>
     </ThemeProvider>

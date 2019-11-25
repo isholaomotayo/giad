@@ -106,7 +106,7 @@ const PleaseSignIn = props => (
       if (!data || !data.me) {
         return <Join alertText="Please signin before you proceed" />;
       }
-
+  
       return props.children;
     }}
   </Query>
