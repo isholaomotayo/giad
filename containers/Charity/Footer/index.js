@@ -6,6 +6,7 @@ import Text from '../../../reusecore/src/elements/Text';
 import Heading from '../../../reusecore/src/elements/Heading';
 import Logo from '../../../reusecore/src/elements/UI/Logo';
 import Container from '../../../common/src/components/UI/Container';
+import * as JivoSite from 'react-jivosite';
 import FooterWrapper, {
   List,
   ListItem,
@@ -196,6 +197,7 @@ const Footer = ({ row, col, colOne, colTwo }) => {
             ))}
           </SocialList>
         </Box>
+        <JivoSite.Widget id="fsXjkaUAe1" />
         {/* End of copyright row */}
       </Container>
     </FooterWrapper>

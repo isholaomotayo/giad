@@ -50,6 +50,7 @@ const Index = shows => {
         <GlobalStyle />
         {/* End of charity head section */}
         {/* Start charity wrapper section */}
+
         <CharityWrapper>
           <Sticky top={0} innerZ={9999} activeClass="sticky-nav-active">
             <Navbar />

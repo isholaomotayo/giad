@@ -12,7 +12,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import * as JivoSite from 'react-jivosite';
+
 import { ThemeProvider } from 'styled-components';
 import { charityTheme } from '../common/src/theme/charity';
 import { ResetCSS } from '../common/src/assets/css/style';
@@ -30,6 +30,19 @@ import Footer from '../containers/Charity/Footer';
 import Container from '../common/src/components/UI/Container';
 import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
+import createCloudinary from '../lib/createCloudinary';
+import { FilePond, File, registerPlugin } from 'react-filepond';
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+
+// Register the plugins
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -80,6 +93,8 @@ const REGISTER_MUTATION = gql`
     $refereePhone: String
     $refereeBank: String
     $refereeAccountNumber: String
+    $userImage: String
+    $IDImage: String
   ) {
     createUserProfile(
       investmentSize: $investmentSize
@@ -109,6 +124,8 @@ const REGISTER_MUTATION = gql`
       refereePhone: $refereePhone
       refereeBank: $refereeBank
       refereeAccountNumber: $refereeAccountNumber
+      userImage: $userImage
+      IDImage: $IDImage
     ) {
       firstname
       middlename
@@ -138,6 +155,7 @@ const Register = ({ row, col }, shows) => {
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
+    files:[],
     investmentSize: '',
     firstname: '',
     middlename: '',
@@ -181,6 +199,8 @@ const Register = ({ row, col }, shows) => {
     refereePhone: '',
     refereeBank: '',
     refereeAccountNumber: '',
+    userImage:'',
+    IDImage:'',
     dateOfBirth: new Date(new Date().setFullYear(new Date().getFullYear() - 18))
   });
   const complete = () => {
@@ -266,7 +286,7 @@ const Register = ({ row, col }, shows) => {
                 <CharityWrapper>
                   <ContentWrapper>
                     <PromotionBlock />
-                    <JivoSite.Widget id="fsXjkaUAe1" />
+                   
                     <NoSsr>
                       <Container width="1260px">
                         <LoadingBar
@@ -287,10 +307,46 @@ const Register = ({ row, col }, shows) => {
                           onSubmit={async e => {
                             e.preventDefault();
                             //LoadingBar.add(20);
-                            await register();
+                            register();
                             //Router.push('/register');
                           }}
                         >
+                        <Box width="40%" m={3}>
+                        <FilePond
+                        labelIdle= 'Drag & Drop your passport photo or Click here to browse'
+    
+                            allowMultiple={false}
+                            maxFiles={1}
+                            server={createCloudinary(
+                              'omotayo',
+                              'pacmgiad',
+                              'userImage',
+                              ({url}) => setValues({...values , userImage:url})
+                            )}
+                              >
+                                {values.files.map(file => (
+                                  <File key={file} source={file} />
+                                ))}
+                              </FilePond>
+                        </Box>
+                        <Box width="40%" m={3}>
+                        <FilePond
+                        labelIdle= 'Drag & Drop your Valid IDcard or or click here to browse'
+    
+                            allowMultiple={false}
+                            maxFiles={1}
+                            server={createCloudinary(
+                              'omotayo',
+                              'pacmgiad',
+                              'IDImage',
+                              ({url}) => setValues({...values , IDImage:url})
+                            )}
+                              >
+                                {values.files.map(file => (
+                                  <File key={file} source={file} />
+                                ))}
+                              </FilePond>
+                        </Box>
                           <Box width="40%" m={3}>
                             <FormControl
                               component="fieldset"
