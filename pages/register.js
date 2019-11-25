@@ -307,7 +307,7 @@ const Register = ({ row, col }, shows) => {
                           onSubmit={async e => {
                             e.preventDefault();
                             //LoadingBar.add(20);
-                            register();
+                            await register();
                             //Router.push('/register');
                           }}
                         >
