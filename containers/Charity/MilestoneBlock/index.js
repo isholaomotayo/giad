@@ -28,18 +28,32 @@ const MilestoneBlock = () => {
           </Link>
         </MilestoneCard>
       </BlockWrapper>
-      <CounterWrapper>
+      <div className="grid-container">
         {counterItems.map(item => (
-          <CounterItem key={`counter_key${item.id}`}>
+          <div key={`counter_key${item.id}`} className="grid-item">
             <Heading as="h3" content={item.amount} />
-            <ul style={{ fontSize: '13px' }}>
+            <ul style={{ fontSize: '13px', listStyleType: 'square' }}>
               {item.title.map(i => (
-                <li key={i}>{i}</li>
+                <li
+                  style={{ fontSize: '13px', listStyleType: 'square' }}
+                  key={i}
+                >
+                  {i}
+                </li>
               ))}
             </ul>
-          </CounterItem>
+          </div>
         ))}
-      </CounterWrapper>
+        <style jsx>{`
+          .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+          }
+          .grid-item {
+            padding: 20px;
+          }
+        `}</style>
+      </div>
     </Container>
   );
 };
