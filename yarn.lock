@@ -5461,6 +5461,11 @@ filenamify@^2.0.0:
     strip-outer "^1.0.0"
     trim-repeated "^1.0.0"
 
+filepond-plugin-file-poster@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-poster/-/filepond-plugin-file-poster-2.2.0.tgz#3c5c72a6a18d30974721e32201008a31961147e3"
+  integrity sha512-PnynEdXqo/XO3V1ofhbJP9la9mKKf/8YjrFEoDKf1ATA9S3fIX1SNCRSn7q4b6O3WMKOJ5RTpHlzBrbDYs5i/A==
+
 filepond-plugin-image-exif-orientation@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/filepond-plugin-image-exif-orientation/-/filepond-plugin-image-exif-orientation-1.0.6.tgz#75920935a5da298884718bfd454f03362ad783e8"
