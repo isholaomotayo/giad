@@ -22,26 +22,7 @@ import Footer from '../containers/Charity/Footer';
 import Container from '../common/src/components/UI/Container';
 import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
-import createCloudinary from '../lib/createCloudinary';
-import { FilePond, File, registerPlugin } from 'react-filepond';
-
-// Import FilePond styles
-import 'filepond/dist/filepond.min.css';
-import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css';
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-// Import the Image EXIF Orientation and Image Preview plugins
-// Note: These need to be installed separately
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
-
-// Register the plugins
-registerPlugin(
-  FilePondPluginImageExifOrientation,
-  FilePondPluginImagePreview,
-  FilePondPluginFilePoster
-);
-
+import FileSize from '../lib/fileSize';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -61,14 +42,18 @@ import { DonateButton } from '../containers/Charity/DonateSection/donateSection.
 
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import fileSize from '../lib/fileSize';
 
 const UPDATE_PAYMENT_STATUS_MUTATION = gql`
   mutation UPDATE_PAYMENT_STATUS_MUTATION(
     $id: ID!
     $profilePaymentMade: Boolean!
+    $ref: String!
   ) {
-    updateUserPaymentStatus(id: $id, profilePaymentMade: $profilePaymentMade) {
+    updateUserPaymentStatus(
+      id: $id
+      profilePaymentMade: $profilePaymentMade
+      ref: $ref
+    ) {
       email
       profilePaymentMade
     }
@@ -76,6 +61,7 @@ const UPDATE_PAYMENT_STATUS_MUTATION = gql`
 `;
 
 import REGISTER_MUTATION from '../lib/registerMutation';
+import FileUpload from '../components/FileUpload';
 
 const styles = theme => ({
   container: {
@@ -103,19 +89,17 @@ class Register extends React.PureComponent {
     lastname: this.props.me.profile.lastname || '',
     sex: this.props.me.profile.sex || '',
     phone: this.props.me.profile.phone || '',
-    investmentOptionValues: {
-      options: [
-        { id: 1, value: 'Edupark', checked: false },
-        { id: 2, value: 'Health park', checked: false },
-        { id: 3, value: 'Skills', checked: false },
-        { id: 4, value: 'Manufacturing/ICT', checked: false },
-        { id: 5, value: 'Sports', checked: false },
-        { id: 6, value: 'Aviation', checked: false },
-        { id: 7, value: 'Mining', checked: false },
-        { id: 8, value: 'Agro—Allied', checked: false },
-        { id: 9, value: 'Tourism/Others', checked: false }
-      ]
-    },
+    investmentOptionValues: [
+      { id: 1, value: 'Edupark', checked: false },
+      { id: 2, value: 'Health park', checked: false },
+      { id: 3, value: 'Skills', checked: false },
+      { id: 4, value: 'Manufacturing/ICT', checked: false },
+      { id: 5, value: 'Sports', checked: false },
+      { id: 6, value: 'Aviation', checked: false },
+      { id: 7, value: 'Mining', checked: false },
+      { id: 8, value: 'Agro—Allied', checked: false },
+      { id: 9, value: 'Tourism/Others', checked: false }
+    ],
     investmentOption: this.props.me.profile.investmentOption || '',
     email: this.props.me.email || '',
     phone: this.props.me.profile.phone || '',
@@ -141,17 +125,17 @@ class Register extends React.PureComponent {
     refereePhone: this.props.me.profile.refereePhone || '',
     refereeBank: this.props.me.profile.refereeBank || '',
     refereeAccountNumber: this.props.me.profile.refereeAccountNumber || '',
-    userImage: this.props.me.profile.userImage || '',
-    IDImage: this.props.me.profile.IDImage || '',
+
     dateOfBirth:
       this.props.me.profile.dateOfBirth ||
       new Date(new Date().setFullYear(new Date().getFullYear() - 18)),
-
+    userImage: this.props.me.profile.userImage || '',
+    IDImage: this.props.me.profile.IDImage || '',
     userImageSize: 0,
     IDImageSize: 0
   };
 
-  newInvestmentCheckedValues = this.state.investmentOptionValues.options.map(
+  newInvestmentCheckedValues = this.state.investmentOptionValues.map(
     opt =>
       (opt.checked = Boolean(
         Math.sign(this.state.investmentOption.split(',').indexOf(opt.value)) !==
@@ -160,13 +144,25 @@ class Register extends React.PureComponent {
           : 0
       ))
   );
+
+  IDImageSizegetter = async url => {
+    let newImageSize = await FileSize(url);
+    this.setState({ IDImageSize: newImageSize });
+    //console.log('image size updated', newImageSize);
+  };
+  userImageSizegetter = async url => {
+    let newImageSize = await FileSize(url);
+    this.setState({ userImageSize: newImageSize });
+    //console.log('image size updated', newImageSize);
+  };
+
   handleCheckboxChange = name => event => {
-    let io = this.state.investmentOptionValues.options;
+    let io = this.state.investmentOptionValues;
     io.forEach(io => {
       if (io.value === event.target.value) io.checked = event.target.checked;
     });
 
-    let investmentOptionsVals = this.state['investmentOptionValues']['options']
+    let investmentOptionsVals = this.state['investmentOptionValues']
       .filter(o => o.checked)
       .map(o => o.value)
       .toString();
@@ -174,12 +170,6 @@ class Register extends React.PureComponent {
     this.setState({
       investmentOption: investmentOptionsVals
     });
-  };
-
-  handleChange2 = e => {
-    const { name, type, value } = e.target;
-    const val = type === 'number' ? parseFloat(value) : value;
-    this.setState({ [name]: val });
   };
 
   handleChange = name => event => {
@@ -191,6 +181,8 @@ class Register extends React.PureComponent {
   };
 
   render() {
+    let IDsize = this.IDImageSizegetter(this.state.IDImage);
+    let userISize = this.userImageSizegetter(this.state.userImage);
     let lgaList =
       this.state.stateOfOrigin !== ''
         ? states[this.state.stateOfOrigin]
@@ -251,9 +243,14 @@ class Register extends React.PureComponent {
                                 <Payment
                                   amount={5000000}
                                   email={me.email}
-                                  callback={async () =>
-                                    await updateUserPaymentStatus()
-                                  }
+                                  callback={async data => {
+                                    console.log('data from payment is', data);
+                                    await updateUserPaymentStatus({
+                                      variables: {
+                                        ref: data.reference
+                                      }
+                                    });
+                                  }}
                                 />
                               )}
                             </Mutation>
@@ -273,78 +270,22 @@ class Register extends React.PureComponent {
                             }}
                           >
                             <Box width="40%" m={3}>
-                              <FilePond
-                                // files={[
-                                //   {
-                                //     // set type to local to indicate an already uploaded file
-                                //     options: {
-                                //       type: 'local',
-
-                                //       // stub file information
-                                //       file: {
-                                //         name: 'user photograph',
-                                //         size: 32423,
-                                //         type: 'image/png'
-                                //       },
-
-                                //       // pass poster property
-                                //       metadata: {
-                                //         poster: this.state.userImage
-                                //       }
-                                //     }
-                                //   }
-                                // ]}
-                                labelIdle="Drag & Drop your passport photo or Click here to browse"
-                                allowMultiple={false}
-                                maxFiles={1}
-                                server={createCloudinary(
-                                  'omotayo',
-                                  'pacmgiad',
-                                  'userImage',
-                                  ({ url }) => setState({ userImage: url })
-                                )}
-                              >
-                                {this.state.files.map(file => (
-                                  <File key={file} source={file} />
-                                ))}
-                              </FilePond>
+                              <FileUpload
+                                me={me}
+                                imageSize={this.state.userImageSize}
+                                imageUrl={this.state.userImage}
+                                label="click here to upload your passport photo"
+                                imageName="Profile Image (Passport Photo)"
+                              />
                             </Box>
                             <Box width="40%" m={3}>
-                              <FilePond
-                                // files={[
-                                //   {
-                                //     // set type to local to indicate an already uploaded file
-                                //     options: {
-                                //       type: 'local',
-
-                                //       // stub file information
-                                //       file: {
-                                //         name: 'user ID image',
-                                //         size: 423424,
-                                //         type: 'image/png'
-                                //       },
-
-                                //       // pass poster property
-                                //       metadata: {
-                                //         poster: this.state.IDImage
-                                //       }
-                                //     }
-                                //   }
-                                // ]}
-                                labelIdle="Drag & Drop your Valid IDcard or or click here to browse"
-                                allowMultiple={false}
-                                maxFiles={1}
-                                server={createCloudinary(
-                                  'omotayo',
-                                  'pacmgiad',
-                                  'IDImage',
-                                  ({ url }) => setState({ IDImage: url })
-                                )}
-                              >
-                                {this.state.files.map(file => (
-                                  <File key={file} source={file} />
-                                ))}
-                              </FilePond>
+                              <FileUpload
+                                me={me}
+                                imageSize={this.state.IDImageSize}
+                                imageUrl={this.state.IDImage}
+                                label="click here to upload your government issued ID photo"
+                                imageName="Government Issued ID card Image"
+                              />
                             </Box>
                             <Box width="40%" m={3}>
                               <FormControl
@@ -629,23 +570,21 @@ class Register extends React.PureComponent {
                                   Investment Options
                                 </FormLabel>
                                 <FormGroup>
-                                  {this.state.investmentOptionValues.options.map(
-                                    io => (
-                                      <FormControlLabel
-                                        key={io.value}
-                                        control={
-                                          <Checkbox
-                                            checked={io.checked}
-                                            onChange={this.handleCheckboxChange(
-                                              io.value
-                                            )}
-                                            value={io.value}
-                                          />
-                                        }
-                                        label={io.value}
-                                      />
-                                    )
-                                  )}
+                                  {this.state.investmentOptionValues.map(io => (
+                                    <FormControlLabel
+                                      key={io.value}
+                                      control={
+                                        <Checkbox
+                                          checked={io.checked}
+                                          onChange={this.handleCheckboxChange(
+                                            io.value
+                                          )}
+                                          value={io.value}
+                                        />
+                                      }
+                                      label={io.value}
+                                    />
+                                  ))}
                                 </FormGroup>
                               </FormControl>
                             </Box>

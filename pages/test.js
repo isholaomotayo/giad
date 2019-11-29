@@ -1,5 +1,6 @@
 import React from 'react';
 import fileSize from '../lib/fileSize';
+import FileUpload from '../components/FileUpload';
 
 class Test extends React.Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class Test extends React.Component {
   render() {
     return (
       <div>
+        <FileUpload />
         {this.props.stars}
         Test Data
         {JSON.stringify(this.state.size)}

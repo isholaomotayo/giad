@@ -9,11 +9,11 @@ class Payment extends React.Component {
     amount: this.props.amount //equals NGN 50k,
   };
 
-  callback =
-    this.props.callback ||
-    (response => {
-      console.log(response); // card charged successfully, get reference here
-    });
+  callback = this.props.callback
+    ? response => this.props.callback(response)
+    : response => {
+        console.log(' ok payment went through hinding ersponse'); // card charged successfully, get reference here
+      };
 
   close =
     this.props.close ||
