@@ -216,11 +216,12 @@ function FullWidthTabs() {
                                 DISASTERS
                               </a>
                               <br />
+                              <br />
                               <a
                                 href="https://res.cloudinary.com/omotayo/image/upload/v1576049610/giad/resources/oljptwfnaap2qnrjneo4.pdf"
                                 target="_blank"
                               >
-                                Registration Form
+                                REGISTRATION FORM
                               </a>
                             </TabPanel>
                           </SwipeableViews>
