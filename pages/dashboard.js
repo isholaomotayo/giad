@@ -215,6 +215,7 @@ function FullWidthTabs() {
                                 CONSTITUTION OF THE GLOBAL INITIATIVE AGAINST
                                 DISASTERS
                               </a>
+                              <br />
                               <a
                                 href="https://res.cloudinary.com/omotayo/image/upload/v1576049610/giad/resources/oljptwfnaap2qnrjneo4.pdf"
                                 target="_blank"
