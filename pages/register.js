@@ -601,10 +601,12 @@ class Register extends React.PureComponent {
                               />
                             </Box>
 
-                            <hr />
-                            <div>Second Next of Kin</div>
-                            <hr />
+                            <Box width="90%" m={2}>
+                              <hr />
+                              <div>Second Next of Kin</div>
 
+                              <hr />
+                            </Box>
                             <Box width="30%" m={2}>
                               <TextField
                                 required={true}
