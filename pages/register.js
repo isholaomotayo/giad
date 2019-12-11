@@ -24,6 +24,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
 import FileSize from '../lib/fileSize';
 import DateFnsUtils from '@date-io/date-fns';
+
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -131,6 +132,22 @@ class Register extends React.PureComponent {
       new Date(new Date().setFullYear(new Date().getFullYear() - 18)),
     userImage: this.props.me.profile.userImage || '',
     IDImage: this.props.me.profile.IDImage || '',
+    nextOfKin1_name: this.props.me.profile.nextOfKin1_name || '',
+    nextOfKin1_relationship:
+      this.props.me.profile.nextOfKin1_relationship || '',
+    nextOfKin1_email: this.props.me.profile.nextOfKin1_email || '',
+    nextOfKin1_phone: this.props.me.profile.nextOfKin1_phone || '',
+    nextOfKin2_name: this.props.me.profile.nextOfKin2_name || '',
+    nextOfKin2_relationship:
+      this.props.me.profile.nextOfKin2_relationship || '',
+    nextOfKin2_email: this.props.me.profile.nextOfKin2_email || '',
+    nextOfKin2_phone: this.props.me.profile.nextOfKin2_phone || '',
+    permanentResidentialAddress:
+      this.props.me.profile.permanentResidentialAddress || '',
+    POBox: this.props.me.profile.POBox || '',
+    PMBag: this.props.me.profile.PMBag || '',
+    PO_State: this.props.me.profile.PO_State || '',
+    PO_Town: this.props.me.profile.PO_Town || '',
     userImageSize: 0,
     IDImageSize: 0
   };
@@ -192,6 +209,8 @@ class Register extends React.PureComponent {
     const { me } = this.props;
     return (
       <>
+        <LoadingBar onRef={ref => (this.LoadingBar = ref)} />
+
         <Mutation
           mutation={REGISTER_MUTATION}
           variables={this.state}
@@ -263,10 +282,18 @@ class Register extends React.PureComponent {
                             method="post"
                             onSubmit={async e => {
                               e.preventDefault();
-                              //LoadingBar.add(20);
+                              this.LoadingBar.continuousStart();
                               let data = await register();
-                              console.log(data);
-                              //Router.push('/register');
+                              this.props.addToast(
+                                'Profie has been successfully saved',
+                                {
+                                  appearance: 'info',
+                                  autoDismiss: true,
+                                  placement: 'top-center'
+                                }
+                              );
+                              //console.log(data);
+                              this.LoadingBar.complete();
                             }}
                           >
                             <Box width="40%" m={3}>
@@ -517,6 +544,178 @@ class Register extends React.PureComponent {
                                 variant="outlined"
                               />
                             </Box>
+
+                            {/* 8stuff starts  */}
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="Next of Kin Name"
+                                className={classes.textField}
+                                value={this.state.nextOfKin1_name}
+                                onChange={this.handleChange('nextOfKin1_name')}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="Next of  Kin Relationship"
+                                className={classes.textField}
+                                value={this.state.nextOfKin1_relationship}
+                                onChange={this.handleChange(
+                                  'nextOfKin1_relationship'
+                                )}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="Next of Kin Email"
+                                className={classes.textField}
+                                value={this.state.nextOfKin1_email}
+                                onChange={this.handleChange('nextOfKin1_email')}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="Next of Kin Phone Number"
+                                className={classes.textField}
+                                value={this.state.nextOfKin1_phone}
+                                onChange={this.handleChange('nextOfKin1_phone')}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+
+                            <hr />
+                            <div>Second Next of Kin</div>
+                            <hr />
+
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="Next of Kin Name"
+                                className={classes.textField}
+                                value={this.state.nextOfKin2_name}
+                                onChange={this.handleChange('nextOfKin2_name')}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="Next of  Kin Relationship"
+                                className={classes.textField}
+                                value={this.state.nextOfKin2_relationship}
+                                onChange={this.handleChange(
+                                  'nextOfKin2_relationship'
+                                )}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="Next of Kin Email"
+                                className={classes.textField}
+                                value={this.state.nextOfKin2_email}
+                                onChange={this.handleChange('nextOfKin2_email')}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="Next of Kin Phone Number"
+                                className={classes.textField}
+                                value={this.state.nextOfKin2_phone}
+                                onChange={this.handleChange('nextOfKin2_phone')}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+                            {/* // Next of kin ends */}
+
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="PO Box"
+                                className={classes.textField}
+                                value={this.state.POBox}
+                                onChange={this.handleChange('POBox')}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="PM Bag"
+                                className={classes.textField}
+                                value={this.state.PMBag}
+                                onChange={this.handleChange('PMBag')}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="Post Office State"
+                                className={classes.textField}
+                                value={this.state.PO_State}
+                                onChange={this.handleChange('PO_State')}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+                            <Box width="30%" m={2}>
+                              <TextField
+                                required={true}
+                                fullWidth
+                                id="outlined-name"
+                                label="Post office Town"
+                                className={classes.textField}
+                                value={this.state.PO_Town}
+                                onChange={this.handleChange('PO_Town')}
+                                margin="normal"
+                                variant="outlined"
+                              />
+                            </Box>
+
+                            {/* //8 stuff */}
+
                             <Box width="30%" m={2}>
                               <TextField
                                 required={true}

@@ -21,6 +21,8 @@ import Profile from './register';
 import User from '../components/User';
 import Payment from '../components/Payments';
 import EnhancedTable from '../components/table';
+
+import { useToasts, ToastProvider } from 'react-toast-notifications';
 import {
   GlobalStyle,
   CharityWrapper,
@@ -66,42 +68,48 @@ const useStyles = makeStyles(theme => ({
 function toPosition(value) {
   let input = String(value).split('');
   let mapData = {
-    "0": "First",
-    "1": "Second",
-    "2": "Third",
-    "3": "Fourth",
-    "4": "Fifth",
-    "5": "Sixth",
-    "6": "Seventh",
-    "7": "Eighth",
-    "8": "Ninth",
-    "9": "Tenth"
+    '0': 'First',
+    '1': 'Second',
+    '2': 'Third',
+    '3': 'Fourth',
+    '4': 'Fifth',
+    '5': 'Sixth',
+    '6': 'Seventh',
+    '7': 'Eighth',
+    '8': 'Ninth',
+    '9': 'Tenth'
   };
   let output = '';
-  var tempArray = []
+  var tempArray = [];
   for (let i = 0; i < input.length; i++) {
-    tempArray.push(mapData[input[i]])
+    tempArray.push(mapData[input[i]]);
   }
   output = tempArray.join(' ');
   return output;
-  }
+}
 
-  const formatDate = (date) => new Date(date).toString().substr(0,24)
-const rows= (me)=> me.payment
-.map( p => {return { ...p , amount :(p.amount/100)}})
-.filter(p => { 
-  
-  return p.amount > "50000"})
-.map( (payment , index )=> {
-  
-  return {name : toPosition(index)+ ' Traunch',
-  amount: parseFloat(payment.amount).toLocaleString("en-GB", {
-    style: "currency",
-    currency: "NGN"
-  }),
-  paid_at : formatDate(payment.paid_at),
-  reference : payment.reference}} ) 
-export default function FullWidthTabs() {
+const formatDate = date => new Date(date).toString().substr(0, 24);
+const rows = me =>
+  me.payment
+    .map(p => {
+      return { ...p, amount: p.amount / 100 };
+    })
+    .filter(p => {
+      return p.amount > '50000';
+    })
+    .map((payment, index) => {
+      return {
+        name: toPosition(index) + ' Traunch',
+        amount: parseFloat(payment.amount).toLocaleString('en-GB', {
+          style: 'currency',
+          currency: 'NGN'
+        }),
+        paid_at: formatDate(payment.paid_at),
+        reference: payment.reference
+      };
+    });
+function FullWidthTabs() {
+  const { addToast } = useToasts();
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -118,7 +126,7 @@ export default function FullWidthTabs() {
     <ThemeProvider theme={charityTheme}>
       <>
         <PleaseSignIn>
-          {/* Start charity head section */ }
+          {/* Start charity head section */}
           <Head>
             <title>GIAD | Global Initiative Axgainst Disasters</title>
             <meta name="Description" content="React next landing page" />
@@ -145,69 +153,97 @@ export default function FullWidthTabs() {
               <DrawerSection />
             </DrawerProvider>
             <ContentWrapper>
-            <User>
-                      {({ data }) => {
-                        const me = data ? data.me : null;
-                        return (
-                          <div>
-                            {me && (
-              <div className={classes.root} style={{ marginTop: '150px' }}>
-                <AppBar position="static" color="default">
-                  <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    centered
-                    variant="fullWidth"
-                    aria-label="full width tabs example"
-                  >
-                    <Tab label="Profile" {...a11yProps(0)} />
-                    <Tab label="Investments" {...a11yProps(1)} />
-                    <Tab label="Resources" {...a11yProps(2)} />
-                  </Tabs>
-                </AppBar>
-                <SwipeableViews
-                  axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                  index={value}
-                  onChangeIndex={handleChangeIndex}
-                >
-                  <TabPanel value={value} index={0} dir={theme.direction}>
-                    <Profile me={me} />
-                  </TabPanel>
-                  <TabPanel value={value} index={1} dir={theme.direction}>
-                    <h3>Investments</h3>
+              <User>
+                {({ data }) => {
+                  const me = data ? data.me : null;
+                  return (
+                    <div>
+                      {me && (
+                        <div
+                          className={classes.root}
+                          style={{ marginTop: '150px' }}
+                        >
+                          <AppBar position="static" color="default">
+                            <Tabs
+                              value={value}
+                              onChange={handleChange}
+                              indicatorColor="primary"
+                              textColor="primary"
+                              centered
+                              variant="fullWidth"
+                              aria-label="full width tabs example"
+                            >
+                              <Tab label="Profile" {...a11yProps(0)} />
+                              <Tab label="Investments" {...a11yProps(1)} />
+                              <Tab label="Resources" {...a11yProps(2)} />
+                            </Tabs>
+                          </AppBar>
+                          <SwipeableViews
+                            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                            index={value}
+                            onChangeIndex={handleChangeIndex}
+                          >
+                            <TabPanel
+                              value={value}
+                              index={0}
+                              dir={theme.direction}
+                            >
+                              <Profile me={me} addToast={addToast} />
+                            </TabPanel>
+                            <TabPanel
+                              value={value}
+                              index={1}
+                              dir={theme.direction}
+                            >
+                              <h3>Investments</h3>
 
-                    
                               <>
-                             
                                 <Payment amount={500000000} />
-                                <EnhancedTable rows = {  rows(me)}/>
+                                <EnhancedTable rows={rows(me)} />
                               </>
-                        
-                  </TabPanel>
-                  <TabPanel value={value} index={2} dir={theme.direction}>
-                    <h3>Resources</h3>
-                    <a
-                      href="https://dwln.s3-us-west-2.amazonaws.com/CONSTITUTION+OF+THE+GLOBAL+INITIATIVE+AGAINST+DISASTERS++the+rest.pdf"
-                      target="_blank"
-                    >
-                      CONSTITUTION OF THE GLOBAL INITIATIVE AGAINST DISASTERS
-                    </a>
-                  </TabPanel>
-                </SwipeableViews>
-              </div>
-               )}
-               {!me && <div>Please login to make payments </div>}
-             </div>
-           );
-         }}
-       </User>
+                            </TabPanel>
+                            <TabPanel
+                              value={value}
+                              index={2}
+                              dir={theme.direction}
+                            >
+                              <h3>Resources</h3>
+                              <a
+                                href="https://dwln.s3-us-west-2.amazonaws.com/CONSTITUTION+OF+THE+GLOBAL+INITIATIVE+AGAINST+DISASTERS++the+rest.pdf"
+                                target="_blank"
+                              >
+                                CONSTITUTION OF THE GLOBAL INITIATIVE AGAINST
+                                DISASTERS
+                              </a>
+                              <a
+                                href="https://res.cloudinary.com/omotayo/image/upload/v1576049610/giad/resources/oljptwfnaap2qnrjneo4.pdf"
+                                target="_blank"
+                              >
+                                Registration Form
+                              </a>
+                            </TabPanel>
+                          </SwipeableViews>
+                        </div>
+                      )}
+                      {!me && <div>Please login to make payments </div>}
+                    </div>
+                  );
+                }}
+              </User>
             </ContentWrapper>
           </CharityWrapper>
-         
         </PleaseSignIn>
       </>
     </ThemeProvider>
   );
 }
+
+const Dashboard = () => {
+  return (
+    <ToastProvider placement="bottom-center">
+      <FullWidthTabs />
+    </ToastProvider>
+  );
+};
+
+export default Dashboard;
